@@ -16,7 +16,7 @@
 
 <link href="http://getbootstrap.com/dist/css/bootstrap.css"	rel="stylesheet">
 
-<link href="http://getbootstrap.com/examples/jumbotron/jumbotron.css"	rel="stylesheet">
+<link href='<spring:url value="/resource/site.css" />'	rel="stylesheet">
 
 </head>
 
@@ -27,16 +27,13 @@
 			<ul class="nav nav-pills pull-right">
 				<tiles:insertAttribute name="navigation" />
 			</ul>
-			<h3 class="text-muted">Web Store</h3>
+			<h3 class="text-muted">Test Online</h3>
 		</div>
 
-		<div class="jumbotron">
-			<h1>
-			<!-- Look up Heading Name in message.properties -->
-			     <c:set var="heading"><tiles:getAsString name="heading" /></c:set>			
- 				<spring:message code="${heading}"/>
-			</h1>
+		<div id="breadcrumb">
 			<p>
+				<c:set var="heading"><tiles:getAsString name="heading" /></c:set>			
+	 			<spring:message code="${heading}"/> -
 			     <c:set var="tagline"><tiles:getAsString name="tagline" /></c:set>			
  				<spring:message code="${tagline}"/>
 			</p>
