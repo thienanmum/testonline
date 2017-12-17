@@ -16,7 +16,7 @@ public class DeploymentDescriptor extends AbstractAnnotationConfigDispatcherServ
 	}
 	
 	protected Class<?>[] getRootConfigClasses() {
-	    return new Class[] {Service.class, Persistence.class, WebSecurityConfig.class};
+	    return new Class[] {Persistence.class, Service.class, WebSecurityConfig.class};
 	}
 	
 	// Allows Characters [ e.g. Chinese] in browser
