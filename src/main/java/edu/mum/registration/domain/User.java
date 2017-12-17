@@ -16,7 +16,7 @@ import edu.mum.validator.NullMinNumber;
 
 
 @Entity 
-public class Member {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

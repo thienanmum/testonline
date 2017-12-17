@@ -13,7 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import edu.mum.registration.domain.Member;
+import edu.mum.registration.domain.Student;
+import edu.mum.registration.domain.User;
 
 @Entity
 public class ExamResult {
@@ -24,7 +25,7 @@ public class ExamResult {
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn
-	private Member student;
+	private Student student;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn

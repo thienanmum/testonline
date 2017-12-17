@@ -6,9 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import edu.mum.registration.domain.Professor;
 
 @Entity
 public class Exam {	
@@ -23,5 +26,8 @@ public class Exam {
 	private String subject;	
 	
 	@OneToMany(mappedBy="exam")
-	private List<ExamQuestion> questions;	
+	private List<ExamQuestion> questions;
+	
+	@ManyToOne
+	private Professor owner;
 }

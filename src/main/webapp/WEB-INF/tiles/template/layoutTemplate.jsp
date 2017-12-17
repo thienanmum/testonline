@@ -14,7 +14,7 @@
 <c:set var="title"><tiles:getAsString name="title" /></c:set>			
 <title><spring:message code="${title}"/></title>
 
-<link href="http://getbootstrap.com/dist/css/bootstrap.css"	rel="stylesheet">
+<link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 
 <link href='<spring:url value="/resource/site.css" />'	rel="stylesheet">
 
