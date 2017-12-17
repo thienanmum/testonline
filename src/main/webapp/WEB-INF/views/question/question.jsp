@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 	
 <html>
  <link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
@@ -9,9 +10,10 @@
  <body>
  	<section class="container" >
 	
-		<form:form  modelAttribute="question" class="form-horizontal" method="POST" action="addQuestion">
+		<form:form  modelAttribute="question" class="form-horizontal" method="POST" action="add">
 			<fieldset>
-				<legend>Add new question</legend>
+				<legend>Edit a question</legend>
+				<form:hidden path="id"/>
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="questionId"><spring:message code="question.questionId"/></label>
 					<div class="col-lg-10">
@@ -45,15 +47,14 @@
 							<form:options items="${questionTypes}"/>
 						</form:select>
 					</div>
-				</div>				
-
-
+				</div>		
+				
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-lg-10">
-						<input type="submit" id="btnAdd" class="btn btn-primary" value ="Add"/>
+						<input type="submit" id="btnAdd" class="btn btn-primary" value ="Update"/>
 					</div>
 				</div>
-				
+								
 			</fieldset>
 		</form:form>
 	</section>

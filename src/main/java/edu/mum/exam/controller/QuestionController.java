@@ -39,7 +39,7 @@ public class QuestionController {
 		binder.addCustomFormatter(questionTypeFormatter);
 	}
 	
-	@RequestMapping(value= "/", method=RequestMethod.GET)
+	@RequestMapping(value= {"","/"}, method=RequestMethod.GET)
 	public String list(Model model) {
 		Iterable<Question> questions = questionService.getAllQuestions();
 		model.addAttribute("questions", questions);
@@ -60,16 +60,17 @@ public class QuestionController {
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String saveQuestion(@Valid @ModelAttribute("question") Question question, BindingResult result) {
 		if (result.hasErrors()) return "question/addQuestion";
-		return "redirect:/questions";
+		questionService.saveQuestion(question);
+		return "redirect:/questions/";
 	}
 	
-//	@ModelAttribute("questionTypes")
-//	Map<String, String> getQuestionTypes(Locale locale) {
-//		Map<String, String> questionTypes = new HashMap<>();
-//		for (QuestionType type : QuestionType.values()) {
-//			questionTypes.put(type.name(), 
-//					messageSource.getMessage(type.getClass().getName()+ "." + type.name(), null, locale));
-//		}
-//		return questionTypes;
-//	}
+	@ModelAttribute("questionTypes")
+	Map<String, String> getQuestionTypes(Locale locale) {
+		Map<String, String> questionTypes = new HashMap<>();
+		for (QuestionType type : QuestionType.values()) {
+			questionTypes.put(type.name(), 
+					messageSource.getMessage(type.getClass().getSimpleName()+ "." + type.name(), null, locale));
+		}
+		return questionTypes;
+	}
 }

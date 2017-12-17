@@ -1,6 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <li><a href="<spring:url value="/welcome" />">Home</a></li>
-<li><a href="<spring:url value="/products/" />">Products</a></li>
-<li><a href="<spring:url value="/products/add" />">Add Product</a></li>
-<li><a href="<spring:url value="/cart/" />">Cart</a></li>
+<li><a href="<spring:url value="/questions/" />">Questions</a></li>
+<li><a href="<spring:url value="/questions/add" />">Add Question</a></li>
+<li><p><a href="?language=en" >English</a>|<a href="?language=nl_NL" >Dutch</a></p></li>					

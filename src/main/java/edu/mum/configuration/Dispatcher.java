@@ -28,7 +28,7 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
  
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = { "edu.mum.registration.controller" })
+@ComponentScan(basePackages = { "edu.mum.*.controller", "edu.mum.formatter"  })
 @Import({WebFlowConfig.class, TilesConfig.class})
 public class Dispatcher extends WebMvcConfigurerAdapter {
  

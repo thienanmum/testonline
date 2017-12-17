@@ -14,6 +14,7 @@
 						<div class="caption">
 							<h3>${question.questionId}</h3>
 							<p>${question.text}</p>
+							<p><spring:message code="QuestionType.${question.type}" /></p>
 							<ol>
 								<c:forEach items="${question.choices}" var="choice">
 									<li>choice.text</li>
@@ -21,7 +22,7 @@
 							</ol>					
 							<p>
 								<a
-									href=" <spring:url value="/questions/detail?id=${product.productId}" /> "
+									href=" <spring:url value="/questions/detail?id=${question.id}" /> "
 									class="btn btn-primary"> <span
 									class="glyphicon-info-sign glyphicon" /></span> Details
 								</a>

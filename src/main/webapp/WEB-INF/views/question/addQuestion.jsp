@@ -7,13 +7,7 @@
  
  <body>
  	<section class="container">
-		<div class="jumbotron pull-right">
-  			<div class="pull-right" style="padding-right:50px">
-				<a href="?language=en" >English</a>|<a href="?language=nl_NL" >Dutch</a>					
-			</div>
-			
-		</div>
-		<form:form  modelAttribute="question" class="form-horizontal" method="POST" action="addQuestion">
+		<form:form  modelAttribute="question" class="form-horizontal" method="POST" action="add">
 			<fieldset>
 				<legend>Add new question</legend>
 				<div class="form-group">
