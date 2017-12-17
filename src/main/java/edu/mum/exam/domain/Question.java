@@ -28,7 +28,7 @@ public class Question {
 	
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name="question_id")
-	private List<QuestionChoices> choices;
+	private List<QuestionChoice> choices;
 
 	public Long getId() {
 		return id;
@@ -70,11 +70,11 @@ public class Question {
 		this.type = type;
 	}
 
-	public List<QuestionChoices> getChoices() {
+	public List<QuestionChoice> getChoices() {
 		return choices;
 	}
 
-	public void setChoices(List<QuestionChoices> choices) {
+	public void setChoices(List<QuestionChoice> choices) {
 		this.choices = choices;
 	}
 }

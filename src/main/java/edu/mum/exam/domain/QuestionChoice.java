@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class QuestionChoices {
+public class QuestionChoice {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;

@@ -14,10 +14,16 @@
 						<div class="caption">
 							<h3>${question.questionId}</h3>
 							<p>${question.text}</p>
-							<p><spring:message code="QuestionType.${question.type}" /></p>
+							<!-- <p><spring:message code="QuestionType.${question.type}" /></p>  -->
 							<ol>
 								<c:forEach items="${question.choices}" var="choice">
-									<li>choice.text</li>
+									<li>
+										<c:choose>
+											<c:when test="${question.type eq 'SingleChoice'}"><input type="radio"/></c:when>
+											<c:when test="${question.type eq 'MultipleChoices'}"><input type="checkbox"/></c:when>
+										</c:choose>
+									${choice.text}
+									</li>
 								</c:forEach>
 							</ol>					
 							<p>
