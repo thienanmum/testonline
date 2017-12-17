@@ -23,6 +23,8 @@ public class Question {
 	@NotNull
 	private Integer sortOrder;
 	
+	private String topic;
+	
 	@Enumerated(EnumType.STRING)
 	private QuestionType type;
 	

@@ -25,6 +25,8 @@ public class ExamQuestion {
 	private Question question;
 	
 	@NotNull
-	private Integer sortOrder;
+	private Integer questionNumber;
+	
+	private Integer gradePoint;
 	
 }

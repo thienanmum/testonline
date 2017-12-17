@@ -11,8 +11,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Exam {
-	
+public class Exam {	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
