@@ -10,14 +10,15 @@ INSERT INTO  `MEMBER` (id,firstname, lastname,age,title,membernumber, member_id)
 INSERT INTO `MEMBER` (id,firstname, lastname,age,title,membernumber,member_id) VALUES (2,'Allen','Rench',123,'Torque Master', 8733,'guest');
 
 /* Insert default questions */
-insert into question(id, questionId, text, sortOrder, type) values (1, "GEN-01", "What is your dream?", 1, "FreeText");
+insert into question(id, questionId, subject, description, level, type) values (1, "GEN-01", "English", "What is your dream?", 1, "FreeText");
 
-insert into question(id, questionId, text, sortOrder, type) values (2, "GEN-02", "How old are you?", 2, "SingleChoice");
+insert into question(id, questionId, subject, description, level, type) values (2, "GEN-02", "Math", "Calculate the area of a square of 4 metre edge", 1, "SingleChoice");
 insert into questionchoice(question_id,text,sortOrder, isCorrect) values(2, "Young", 1, false);
 insert into questionchoice(question_id,text,sortOrder, isCorrect) values(2, "Old", 2, true);
 
-insert into question(id, questionId, text, sortOrder, type) values (3, "GEN-03","What are your hobby?", 3, "MultipleChoices");
-insert into questionchoice(question_id,text,sortOrder, isCorrect) values(3, "Sport", 1, false);
-insert into questionchoice(question_id,text,sortOrder, isCorrect) values(3, "Music", 2, true);
-insert into questionchoice(question_id,text,sortOrder, isCorrect) values(3, "Game", 3, true);
+insert into question(id, questionId, subject, description, level, type) values (3, "GEN-03", "Physics","How long is from here to the sun?", 2, "MultipleChoices");
+insert into questionchoice(question_id,text,sortOrder, isCorrect) values(3, "200k miles", 1, false);
+insert into questionchoice(question_id,text,sortOrder, isCorrect) values(3, "300k miles", 2, true);
+insert into questionchoice(question_id,text,sortOrder, isCorrect) values(3, "400k km", 3, true);
+
 				

@@ -26,11 +26,6 @@ public class Question {
 	@NotEmpty
 	private String description;
 	
-//	@NotNull
-//	private Integer sortOrder;
-	
-	private String topic;
-	
 	@Enumerated(EnumType.STRING)
 	private QuestionType type;
 	
@@ -61,14 +56,6 @@ public class Question {
 	public void setText(String description) {
 		this.description = description;
 	}
-
-//	public Integer getSortOrder() {
-//		return sortOrder;
-//	}
-//
-//	public void setSortOrder(Integer sortOrder) {
-//		this.sortOrder = sortOrder;
-//	}
 
 	public QuestionType getType() {
 		return type;
