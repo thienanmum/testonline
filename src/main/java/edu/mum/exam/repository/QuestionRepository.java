@@ -10,6 +10,6 @@ import edu.mum.exam.domain.Question;
 
 @Repository
 public interface QuestionRepository extends CrudRepository<Question, Long> {
-	@Query("select q from Question q order by q.sortOrder")
+	@Query("select q from Question q order by q.id")
 	List<Question> getAllSortedQuestions();
 }

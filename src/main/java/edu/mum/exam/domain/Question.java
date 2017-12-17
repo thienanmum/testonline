@@ -18,10 +18,16 @@ public class Question {
 	private String questionId;
 	
 	@NotEmpty
-	private String text;
+	private String subject;
 	
 	@NotNull
-	private Integer sortOrder;
+	private Integer level;
+	
+	@NotEmpty
+	private String description;
+	
+//	@NotNull
+//	private Integer sortOrder;
 	
 	private String topic;
 	
@@ -48,21 +54,21 @@ public class Question {
 		this.questionId = questionId;
 	}
 
-	public String getText() {
-		return text;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setText(String description) {
+		this.description = description;
 	}
 
-	public Integer getSortOrder() {
-		return sortOrder;
-	}
-
-	public void setSortOrder(Integer sortOrder) {
-		this.sortOrder = sortOrder;
-	}
+//	public Integer getSortOrder() {
+//		return sortOrder;
+//	}
+//
+//	public void setSortOrder(Integer sortOrder) {
+//		this.sortOrder = sortOrder;
+//	}
 
 	public QuestionType getType() {
 		return type;
@@ -78,5 +84,21 @@ public class Question {
 
 	public void setChoices(List<QuestionChoice> choices) {
 		this.choices = choices;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
 }

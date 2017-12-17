@@ -13,7 +13,7 @@
 		<form:form  modelAttribute="question" class="form-horizontal" method="POST" action="add">
 			<fieldset>
 				<legend>Edit a question</legend>
-				<form:hidden path="id"/>
+				
 				<div class="form-group">
 					<label class="control-label col-sm-4" for="questionId"><spring:message code="question.questionId"/></label>
 					<div class="col-sm-6">
@@ -21,21 +21,31 @@
 						<form:errors path="questionId" cssClass="text-danger"/>
 					</div>
 				</div>
-
+								
 				<div class="form-group">
-					<label class="control-label col-sm-4" for="sortOrder"><spring:message code="question.sortOrder"/></label>
-					<div class="col-sm-6">
+					<label class="control-label col-sm-4" for="subject"><spring:message code="question.subject"/></label>
+					<div class="col-md-4">
 						<div class="form:input-prepend">
-							<form:input id="sortOrder" path="sortOrder" type="text" class="form:input-large"/>
-							<form:errors path="sortOrder" cssClass="text-danger"/>
+							<form:input id="subject" path="subject" type="text" class="form:input-large"/>
+							<form:errors path="subject" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-sm-4" for="level"><spring:message code="question.level"/></label>
+					<div class="col-md-4">
+						<div class="form:input-prepend">
+							<form:input id="level" path="level" type="text" class="form:input-large"/>
+							<form:errors path="level" cssClass="text-danger"/>
 						</div>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-sm-4" for="text"><spring:message code="question.text"/></label>
-					<div class="col-sm-6">
-						<form:textarea id="text" path="text" rows = "2"/>
+					<label class="control-label col-sm-4" for="description"><spring:message code="question.description"/></label>
+					<div class="col-md-4">
+						<form:textarea id="text" path="description" rows = "5"/>
 					</div>
 				</div>
 
