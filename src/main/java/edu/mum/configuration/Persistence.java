@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("edu.mum.registration.repository")
+@ComponentScan("edu.mum.*.repository")
 @EnableJpaRepositories("edu.mum.registration.repository")
 @PropertySource(value="classpath:application.properties")
 public class Persistence {
@@ -41,7 +41,7 @@ public class Persistence {
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
-        factoryBean.setPackagesToScan(new String[] { "edu.mum.registration.domain" });
+        factoryBean.setPackagesToScan(new String[] { "edu.mum.*.domain" });
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setShowSql(true);
         factoryBean.setJpaVendorAdapter(vendorAdapter);
