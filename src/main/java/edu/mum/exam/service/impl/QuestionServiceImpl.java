@@ -18,7 +18,7 @@ public class QuestionServiceImpl implements QuestionService {
 	
 	@Override
 	public Iterable<Question> getAllQuestions() {
-		return questionRepository.findAll();
+		return questionRepository.getAllSortedQuestions();
 	}
 
 	@Override
