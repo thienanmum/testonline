@@ -5,7 +5,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -17,10 +16,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import edu.mum.exam.domain.Level;
 import edu.mum.exam.domain.Question;
 import edu.mum.exam.domain.QuestionType;
+import edu.mum.exam.domain.Subject;
 import edu.mum.exam.service.QuestionService;
+import edu.mum.exam.service.SubjectService;
+import edu.mum.formatter.LevelFormatter;
 import edu.mum.formatter.QuestionTypeFormatter;
 
 @RequestMapping("/questions")
@@ -31,12 +33,22 @@ public class QuestionController {
 	MessageSource messageSource;	
 	@Autowired
 	private QuestionTypeFormatter questionTypeFormatter;
+	
+	@Autowired
+	private LevelFormatter levelFormatter;	
+		
 	@Autowired
 	private QuestionService questionService;
+	
+	@Autowired
+	private SubjectService subjectService;
+	
+	
 	
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		binder.addCustomFormatter(questionTypeFormatter);
+		binder.addCustomFormatter(levelFormatter);		
 	}
 	
 	@RequestMapping(value= {"","/"}, method=RequestMethod.GET)
@@ -47,7 +59,9 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String addQuestion(@ModelAttribute("question") Question question) {
+	public String addQuestion(@ModelAttribute("question") Question question, Model model) {
+		Iterable<Subject> subjects = subjectService.getAllSubjects();
+		model.addAttribute("subjects",	subjects);
 		return "question/addQuestion";
 	}
 	
@@ -72,5 +86,15 @@ public class QuestionController {
 					messageSource.getMessage(type.getClass().getSimpleName()+ "." + type.name(), null, locale));
 		}
 		return questionTypes;
+	}	
+		
+	@ModelAttribute("levels")
+	Map<String, String> getLevels(Locale locale) {
+		Map<String, String> levels = new HashMap<>();
+		for (Level level : Level.values()) {
+			levels.put(level.name(), 
+					messageSource.getMessage(level.getClass().getSimpleName()+ "." + level.name(), null, locale));
+		}
+		return levels;
 	}
 }
