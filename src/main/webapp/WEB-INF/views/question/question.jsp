@@ -5,6 +5,7 @@
 
 <html>
  <link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+ <style><%@include file="/resources/css/site.css"%></style>
  	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="<spring:url value="/resource/js/cart.js"/>"></script>
 	
@@ -26,9 +27,8 @@
 				<div class="form-group">
 					<label class="control-label col-sm-4" for="subject"><spring:message code="question.subject"/></label>
 					<div class="col-sm-6">												
-						<form:select id="subject" path="subject" class="width200">
-							<form:option value="-" label="---Select a subject---"/>
-							<form:options items="${subjects}"/>
+						<form:select id="subject" path="subject.id" class="width200">							
+							<form:options items="${subjects}" itemLabel="name" itemValue="id"/>
 						</form:select>						
 					</div>
 				</div>
@@ -56,7 +56,7 @@
 				<div class="form-group">
 					<label class="control-label col-sm-4" for="description"><spring:message code="question.description"/></label>
 					<div class="col-md-4">
-						<form:textarea id="text" path="description" rows = "5"/>
+						<form:textarea id="text" path="description" rows = "5" cols="100"/>
 					</div>
 				</div>				
 				
@@ -64,14 +64,8 @@
 					<div class="col-lg-offset-2 col-sm-10">
 						<input type="submit" id="btnAdd" class="btn btn-primary" value ="Update"/>
 					</div>
-				</div>
-			
-				<div class="form-group">
-					<div class="col-lg-offset-2 col-sm-10">
-						<input type="submit" id="btnAdd" class="btn btn-primary" value ="Update"/>
-					</div>
-				</div>
-							
+				</div>		
+											
 			</fieldset>
 		</form:form>
 	</section>

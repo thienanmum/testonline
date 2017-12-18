@@ -43,6 +43,8 @@ public class QuestionController {
 	@Autowired
 	private SubjectService subjectService;
 	
+	private Iterable<Subject> subjects;
+	
 	
 	
 	@InitBinder
@@ -60,7 +62,7 @@ public class QuestionController {
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String addQuestion(@ModelAttribute("question") Question question, Model model) {
-		Iterable<Subject> subjects = subjectService.getAllSubjects();
+		subjects = subjectService.getAllSubjects();
 		model.addAttribute("subjects",	subjects);
 		return "question/addQuestion";
 	}
@@ -68,6 +70,8 @@ public class QuestionController {
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
 	public String showQuestionDetail(@RequestParam("id") Long id, Model model) {
 		model.addAttribute("question", questionService.getQuestionById(id));
+		subjects = subjectService.getAllSubjects();
+		model.addAttribute("subjects",	subjects);
 		return "question/question";
 	}
 	
