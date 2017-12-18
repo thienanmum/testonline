@@ -57,17 +57,13 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String addQuestion(@ModelAttribute("question") Question question, Model model) {
-		Iterable<Subject> subjects = subjectService.getAllSubjects();
-		model.addAttribute("subjects",	subjects);
+	public String addQuestion(@ModelAttribute("question") Question question) {		
 		return "question/addQuestion";
 	}
 	
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
 	public String showQuestionDetail(@RequestParam("id") Long id, Model model) {
-		model.addAttribute("question", questionService.getQuestionById(id));
-		Iterable<Subject> subjects = subjectService.getAllSubjects();
-		model.addAttribute("subjects",	subjects);
+		model.addAttribute("question", questionService.getQuestionById(id));		
 		return "question/question";
 	}
 	
@@ -96,5 +92,10 @@ public class QuestionController {
 					messageSource.getMessage(level.getClass().getSimpleName()+ "." + level.name(), null, locale));
 		}
 		return levels;
+	}
+	
+	@ModelAttribute("subjects")
+	Iterable<Subject> getSubjects(Locale locale){
+		return subjectService.getAllSubjects();
 	}
 }
