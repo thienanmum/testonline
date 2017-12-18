@@ -17,11 +17,12 @@ public class Question {
 	@NotEmpty
 	private String questionId;
 	
-	@NotEmpty
-	private String subject;
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="subject")
+	private Subject subject;
 	
-	@NotNull
-	private Integer level;
+	@Enumerated(EnumType.STRING)
+	private Level level;
 	
 	@NotEmpty
 	private String description;
@@ -73,19 +74,19 @@ public class Question {
 		this.choices = choices;
 	}
 
-	public String getSubject() {
+	public Subject getSubject() {
 		return subject;
 	}
 
-	public void setSubject(String subject) {
+	public void setSubject(Subject subject) {
 		this.subject = subject;
 	}
 
-	public Integer getLevel() {
+	public Level getLevel() {
 		return level;
 	}
 
-	public void setLevel(Integer level) {
+	public void setLevel(Level level) {
 		this.level = level;
 	}
 }
