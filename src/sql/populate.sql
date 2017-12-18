@@ -21,4 +21,8 @@ insert into questionchoice(question_id,text,sortOrder, isCorrect) values(3, "200
 insert into questionchoice(question_id,text,sortOrder, isCorrect) values(3, "300k miles", 2, true);
 insert into questionchoice(question_id,text,sortOrder, isCorrect) values(3, "400k km", 3, true);
 
+insert into exam(id, examId, subject) values (1, "WAA-Dec2017-MidTerm", "Web Application");
+insert into examQuestion(exam, question, questionNumber) values(1, 1, 1);
+insert into examQuestion(exam, question, questionNumber) values(1, 2, 2);
+insert into examQuestion(exam, question, questionNumber) values(1, 3, 3);
 				

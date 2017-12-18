@@ -9,6 +9,7 @@
  	<action-state id="createAssessment">
  		<evaluate expression="assessmentFlowHelper.createAssessment(requestParameters.examId)" 
  			result="assessment"/>
+ 		<transition to="answerQuestion"/>
 	</action-state>
  	
 	<view-state id="answerQuestion">

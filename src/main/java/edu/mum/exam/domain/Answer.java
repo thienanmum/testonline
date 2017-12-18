@@ -1,5 +1,6 @@
 package edu.mum.exam.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -66,5 +67,18 @@ public class Answer {
 
 	public void setChoices(List<AnswerChoice> choices) {
 		this.choices = choices;
+	}
+	
+	public void assignQuestion(Question theQuestion) {
+		question = theQuestion;
+		if (question.getType() == QuestionType.MultipleChoices || 
+			question.getType() == QuestionType.SingleChoice) {
+			choices = new ArrayList<>();
+			for (QuestionChoice questionChoice : question.getChoices()) {
+				AnswerChoice answerChoice = new AnswerChoice();
+				answerChoice.setQuestionChoice(questionChoice);
+				choices.add(answerChoice);
+			}			
+		}
 	}
 }

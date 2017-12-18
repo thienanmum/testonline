@@ -1,5 +1,6 @@
 package edu.mum.exam.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class Assessment {
 	private Date startTime;
 	
 	/*
-	 * The time at that student finishs the exam.
+	 * The time at that student finish the exam.
 	 */
 	private Date endTime;
 
@@ -108,4 +109,13 @@ public class Assessment {
 		this.endTime = endTime;
 	}
 	
+	public void assignExam(Exam theExam) {
+		exam = theExam;
+		answers = new ArrayList<>();
+		for (ExamQuestion examQuestion : exam.getQuestions()) {
+			Answer answer = new Answer();
+			answer.setQuestion(examQuestion.getQuestion());
+			answers.add(answer);
+		}
+	}
 }

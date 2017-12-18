@@ -17,4 +17,20 @@ public class AnswerChoice {
 	@ManyToOne
 	@JoinColumn
 	private QuestionChoice questionChoice;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public QuestionChoice getQuestionChoice() {
+		return questionChoice;
+	}
+
+	public void setQuestionChoice(QuestionChoice questionChoice) {
+		this.questionChoice = questionChoice;
+	}
 }

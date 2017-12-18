@@ -1,11 +1,14 @@
 package edu.mum.exam.controller.flow;
 
+import java.io.Serializable;
+
 import edu.mum.exam.domain.Answer;
 import edu.mum.exam.domain.Assessment;
 import edu.mum.exam.domain.Question;
 
-public class AssessmentWrapper {
-	
+public class AssessmentWrapper implements Serializable {
+
+	private static final long serialVersionUID = -7133850711914981763L;
 	private Assessment assessment;
 	private int currentIndex;
 	
@@ -56,4 +59,5 @@ public class AssessmentWrapper {
 	public Question getQuestion() {
 		return getAnswer().getQuestion();
 	}
+
 }
