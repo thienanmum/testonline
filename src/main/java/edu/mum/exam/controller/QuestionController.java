@@ -41,12 +41,8 @@ public class QuestionController {
 	private QuestionService questionService;
 	
 	@Autowired
-	private SubjectService subjectService;
-	
-	private Iterable<Subject> subjects;
-	
-	
-	
+	private SubjectService subjectService;	
+		
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		binder.addCustomFormatter(questionTypeFormatter);
@@ -62,7 +58,7 @@ public class QuestionController {
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String addQuestion(@ModelAttribute("question") Question question, Model model) {
-		subjects = subjectService.getAllSubjects();
+		Iterable<Subject> subjects = subjectService.getAllSubjects();
 		model.addAttribute("subjects",	subjects);
 		return "question/addQuestion";
 	}
@@ -70,7 +66,7 @@ public class QuestionController {
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
 	public String showQuestionDetail(@RequestParam("id") Long id, Model model) {
 		model.addAttribute("question", questionService.getQuestionById(id));
-		subjects = subjectService.getAllSubjects();
+		Iterable<Subject> subjects = subjectService.getAllSubjects();
 		model.addAttribute("subjects",	subjects);
 		return "question/question";
 	}

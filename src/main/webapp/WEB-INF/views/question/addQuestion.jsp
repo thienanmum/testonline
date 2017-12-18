@@ -10,7 +10,7 @@
  
  <body>
  	<section class="container">
-		<form:form  modelAttribute="question" class="form-horizontal" method="POST" action="add">
+		<form:form  modelAttribute="question" class="form-horizontal" method="POST" action="add" enctype="multipart/form-data">
 			<fieldset>
 				<legend>Add new question</legend>
 				
@@ -53,11 +53,18 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label col-sm-4" for=description><spring:message code="question.description"/></label>
+					<label class="control-label col-sm-4" for="description"><spring:message code="question.description"/></label>
 					<div class="col-sm-6">
 						<form:textarea id="text" path="description" rows = "5" cols="100"/>
 					</div>
-				</div>			
+				</div>		
+				
+				<div class="form-group">
+					<label class="control-label col-sm-4" for="image"><spring:message code="question.image"/></label>
+					<div class="col-sm-6">						
+						<form:input id="image" path="image" type="file"/>
+					</div>
+				</div>	
 				
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-sm-10">

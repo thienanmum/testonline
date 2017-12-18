@@ -7,6 +7,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Question {
@@ -27,6 +30,10 @@ public class Question {
 	@NotEmpty
 	private String description;
 	
+	@JsonIgnore
+	@Lob
+	private MultipartFile image;
+		
 	@Enumerated(EnumType.STRING)
 	private QuestionType type;
 	
@@ -89,4 +96,13 @@ public class Question {
 	public void setLevel(Level level) {
 		this.level = level;
 	}
+
+	public MultipartFile getImage() {
+		return image;
+	}
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+	
 }
