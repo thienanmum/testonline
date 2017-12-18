@@ -20,7 +20,7 @@ public class Question {
 	@NotEmpty
 	private String questionId;
 	
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.REFRESH)
 	@JoinColumn(name="subject")
 	@Valid
 	private Subject subject;
@@ -64,7 +64,7 @@ public class Question {
 		return description;
 	}
 
-	public void setText(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 

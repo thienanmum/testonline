@@ -27,7 +27,8 @@
 				<div class="form-group">
 					<label class="control-label col-sm-4" for="subject"><spring:message code="question.subject"/></label>
 					<div class="col-sm-6">												
-						<form:select id="subject" path="subject.id" class="width200">							
+						<form:select id="subject" path="subject.id" class="width200">
+							<form:option value="" label="---Select a subject---"/>							
 							<form:options items="${subjects}" itemLabel="name" itemValue="id"/>
 						</form:select>						
 					</div>
@@ -37,7 +38,7 @@
 					<label class="control-label col-sm-4" for="level"><spring:message code="question.level"/></label>
 					<div class="col-sm-6">
 						<form:select id="level" path="level" class="width200">
-							<form:option value="" label="--Select a level--"/>
+							<form:option value="" label="---Select a level---"/>
 							<form:options items="${levels}"/>
 						</form:select>
 					</div>
@@ -47,7 +48,7 @@
 					<label class="control-label col-sm-4" for="type"><spring:message code="question.type"/></label>
 					<div class="col-sm-6">
 						<form:select id="type" path="type" class="width200">
-							<form:option value="" label="--Select a Type--"/>
+							<form:option value="" label="---Select a type---"/>
 							<form:options items="${questionTypes}"/>
 						</form:select>
 					</div>
@@ -56,7 +57,7 @@
 				<div class="form-group">
 					<label class="control-label col-sm-4" for="description"><spring:message code="question.description"/></label>
 					<div class="col-md-4">
-						<form:textarea id="text" path="description" rows = "5" cols="100"/>
+						<form:textarea id="description" path="description" rows = "5" cols="100"/>
 					</div>
 				</div>				
 				

@@ -58,7 +58,7 @@
 				<div class="form-group">
 					<label class="control-label col-sm-4" for="description"><spring:message code="question.description"/></label>
 					<div class="col-sm-6">
-						<form:textarea id="text" path="description" rows = "5" cols="100"/>
+						<form:textarea id="description" path="description" rows = "5" cols="100"/>
 						<form:errors path="description" cssClass="text-danger"/>
 					</div>
 				</div>		

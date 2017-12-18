@@ -1,9 +1,11 @@
 package edu.mum.exam.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -16,12 +18,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import edu.mum.exam.domain.Level;
 import edu.mum.exam.domain.Question;
 import edu.mum.exam.domain.QuestionType;
 import edu.mum.exam.domain.Subject;
 import edu.mum.exam.service.QuestionService;
 import edu.mum.exam.service.SubjectService;
+import edu.mum.exception.ImageNotSaveException;
 import edu.mum.formatter.LevelFormatter;
 import edu.mum.formatter.QuestionTypeFormatter;
 
@@ -32,16 +37,15 @@ public class QuestionController {
 	@Autowired
 	MessageSource messageSource;	
 	@Autowired
-	private QuestionTypeFormatter questionTypeFormatter;
-	
+	private QuestionTypeFormatter questionTypeFormatter;	
 	@Autowired
-	private LevelFormatter levelFormatter;	
-		
+	private LevelFormatter levelFormatter;			
 	@Autowired
-	private QuestionService questionService;
-	
+	private QuestionService questionService;	
 	@Autowired
 	private SubjectService subjectService;	
+	@Autowired
+	ServletContext servletContext;
 		
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
@@ -70,7 +74,23 @@ public class QuestionController {
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String saveQuestion(@Valid @ModelAttribute("question") Question question, BindingResult result) {
 		if (result.hasErrors()) return "question/addQuestion";
+		
+		//Save question
 		questionService.saveQuestion(question);
+		
+		//Save image
+		MultipartFile image = question.getImage();
+ 		String rootDirectory = servletContext.getRealPath("/");
+ 			
+		//isEmpty means file exists BUT NO Content
+		if (image!=null && !image.isEmpty()) {
+	       try {
+	    	   image.transferTo(new File(rootDirectory+"\\resources\\images\\"+ question.getQuestionId() + ".png"));
+	       } catch (Exception e) {
+			throw new ImageNotSaveException();
+	       }
+		}		
+		
 		return "redirect:/questions/";
 	}
 	
