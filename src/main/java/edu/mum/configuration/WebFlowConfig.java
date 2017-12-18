@@ -18,8 +18,7 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
    public FlowDefinitionRegistry flowRegistry() {
        return getFlowDefinitionRegistryBuilder()
                .setBasePath("/WEB-INF/flows")
-               .addFlowLocation("/checkout/checkout-flow.xml", "checkout")
-               .addFlowLocation("/creditcard/creditCard-flow.xml" , "creditCard")
+               .addFlowLocation("/assessment/assessment-flow.xml", "assessment/start")
                 .build();
    
    }

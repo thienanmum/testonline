@@ -17,7 +17,7 @@ import edu.mum.registration.domain.Student;
 import edu.mum.registration.domain.User;
 
 @Entity
-public class ExamResult {
+public class Assessment {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -50,6 +50,62 @@ public class ExamResult {
 	/*
 	 * The time at that student finishs the exam.
 	 */
-	private Date endTime;	
+	private Date endTime;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Exam getExam() {
+		return exam;
+	}
+
+	public void setExam(Exam exam) {
+		this.exam = exam;
+	}
+
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
 	
 }
