@@ -16,13 +16,13 @@ insert into subject(id, name) values(3, "Physic")
 
 
 /* Insert default questions */
-insert into question(id, questionId, subject, description, image, level, type) values (1, "GEN-01", 1, "What is your dream?", null, "Easy", "FreeText");
+insert into question(id, questionId, subject, description, level, type) values (1, "GEN-01", 1, "What is your dream?", "Easy", "FreeText");
 
-insert into question(id, questionId, subject, description, image, level, type) values (2, "GEN-02", 2, "Calculate the area of a square of 4 metre edge", null, "Easy", "SingleChoice");
+insert into question(id, questionId, subject, description, level, type) values (2, "GEN-02", 2, "Calculate the area of a square of 4 metre edge", "Easy", "SingleChoice");
 insert into questionchoice(question_id,text,sortOrder, isCorrect) values(2, "Young", 1, false);
 insert into questionchoice(question_id,text,sortOrder, isCorrect) values(2, "Old", 2, true);
 
-insert into question(id, questionId, subject, description, image, level, type) values (3, "GEN-03", 3,"How long is from here to the sun?", null, "Medium", "MultipleChoices");
+insert into question(id, questionId, subject, description, level, type) values (3, "GEN-03", 3,"How long is from here to the sun?", "Medium", "MultipleChoices");
 insert into questionchoice(question_id,text,sortOrder, isCorrect) values(3, "200k miles", 1, false);
 insert into questionchoice(question_id,text,sortOrder, isCorrect) values(3, "300k miles", 2, true);
 insert into questionchoice(question_id,text,sortOrder, isCorrect) values(3, "400k km", 3, true);

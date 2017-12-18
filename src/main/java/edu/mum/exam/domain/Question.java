@@ -22,19 +22,22 @@ public class Question {
 	
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="subject")
+	@Valid
 	private Subject subject;
 	
 	@Enumerated(EnumType.STRING)
+	@NotNull
 	private Level level;
 	
 	@NotEmpty
 	private String description;
 	
 	@JsonIgnore
-	@Lob
+	@Transient
 	private MultipartFile image;
 		
 	@Enumerated(EnumType.STRING)
+	@NotNull
 	private QuestionType type;
 	
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
