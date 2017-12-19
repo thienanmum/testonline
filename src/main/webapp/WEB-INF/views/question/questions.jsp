@@ -15,6 +15,7 @@
 							<h3>${question.questionId}</h3>
 							<p>${question.description}</p>
 							<!-- <p><spring:message code="QuestionType.${question.type}" /></p>  -->
+							<img src="<c:url value ="/resource/images/${question.questionId}.png"/>" alt="This is the question image"/>
 							<ol>
 								<c:forEach items="${question.choices}" var="choice">
 									<li>

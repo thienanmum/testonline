@@ -8,6 +8,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Question implements Serializable {
@@ -20,17 +23,24 @@ public class Question implements Serializable {
 	@NotEmpty
 	private String questionId;
 	
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.REFRESH)
 	@JoinColumn(name="subject")
+	@Valid
 	private Subject subject;
 	
 	@Enumerated(EnumType.STRING)
+	@NotNull
 	private Level level;
 	
 	@NotEmpty
 	private String description;
 	
+	@JsonIgnore
+	@Transient
+	private MultipartFile image;
+		
 	@Enumerated(EnumType.STRING)
+	@NotNull
 	private QuestionType type;
 	
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
@@ -57,7 +67,7 @@ public class Question implements Serializable {
 		return description;
 	}
 
-	public void setText(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -92,4 +102,13 @@ public class Question implements Serializable {
 	public void setLevel(Level level) {
 		this.level = level;
 	}
+
+	public MultipartFile getImage() {
+		return image;
+	}
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+	
 }
