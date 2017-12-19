@@ -80,7 +80,7 @@ public class QuestionController {
 		
 		//Save image
 		MultipartFile image = question.getImage();
- 		String rootDirectory = servletContext.getRealPath("/");
+ 		String rootDirectory = servletContext.getRealPath("/"); 		
  			
 		//isEmpty means file exists BUT NO Content
 		if (image!=null && !image.isEmpty()) {
