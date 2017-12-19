@@ -19,7 +19,7 @@ public class Question implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
+	@Column(unique=true)
 	@NotEmpty
 	private String questionId;
 	
@@ -87,6 +87,17 @@ public class Question implements Serializable {
 		this.choices = choices;
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if(o.getClass().equals(this.getClass()))
+				{
+				if (((Question) o).getQuestionId().equals(this.getQuestionId()))
+						return true;
+				}
+		return false;
+	}
+
 	public Subject getSubject() {
 		return subject;
 	}
@@ -110,5 +121,4 @@ public class Question implements Serializable {
 	public void setImage(MultipartFile image) {
 		this.image = image;
 	}
-	
 }

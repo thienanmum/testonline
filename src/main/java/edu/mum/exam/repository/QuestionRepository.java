@@ -12,4 +12,5 @@ import edu.mum.exam.domain.Question;
 public interface QuestionRepository extends CrudRepository<Question, Long> {
 	@Query("select q from Question q order by q.id")
 	List<Question> getAllSortedQuestions();
+	Question getQuestionByquestionId(String questionId);
 }

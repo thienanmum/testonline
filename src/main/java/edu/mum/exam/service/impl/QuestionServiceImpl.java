@@ -27,8 +27,12 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
+	public Question getQuestionByquestionId(String questionId) {
+		return questionRepository.getQuestionByquestionId(questionId);
+	}
+	
+	@Override
 	public Question getQuestionById(long questionId) {
 		return questionRepository.findOne(questionId);
 	}
-
 }

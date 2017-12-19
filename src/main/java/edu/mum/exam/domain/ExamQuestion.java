@@ -23,6 +23,8 @@ public class ExamQuestion implements Serializable {
 	@JoinColumn
 	private Exam exam;
 	
+	
+
 	@ManyToOne
 	@JoinColumn
 	private Question question;

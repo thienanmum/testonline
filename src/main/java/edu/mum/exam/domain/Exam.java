@@ -3,7 +3,9 @@ package edu.mum.exam.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,14 +23,14 @@ public class Exam implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
+	@Column(unique=true)
 	@NotEmpty
 	private String examId;
 	
 	@NotEmpty
 	private String subject;	
 	
-	@OneToMany(mappedBy="exam")
+    @OneToMany(mappedBy="exam",fetch=FetchType.EAGER)
 	private List<ExamQuestion> questions;
 	
 	@ManyToOne
@@ -73,6 +75,5 @@ public class Exam implements Serializable {
 	public void setOwner(Professor owner) {
 		this.owner = owner;
 	}
-	
 	
 }

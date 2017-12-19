@@ -5,6 +5,7 @@ import edu.mum.exam.domain.Question;
 public interface QuestionService {
 	Iterable<Question> getAllQuestions();
 	Question saveQuestion(Question question);
-	Question getQuestionById(long questionId);
+	Question getQuestionByquestionId(String questionId);
+	Question getQuestionById(long id);
 	
 }
