@@ -12,7 +12,13 @@
  ${exam.subject}<br>
  <c:forEach items="${exam.questions}" var="question">
 ${question.questionNumber} ${question.question.description} ${question.gradePoint}<br>
-</c:forEach>		
+</c:forEach>
+<div id="update">
+<form id="modify" action="examStatus">
+<input type="submit" value="Modify"/>
+</form>
+</div>
+		
  	
 </body>
 </html>
