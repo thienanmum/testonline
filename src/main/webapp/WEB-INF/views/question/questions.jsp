@@ -16,14 +16,14 @@
 							<p>${question.description}</p>
 							<!-- <p><spring:message code="QuestionType.${question.type}" /></p>  -->
 							<img src="<c:url value ="/resource/images/${question.questionId}.png"/>" alt="This is the question image"/>
-							<ol>
+							<ol class="choices">
 								<c:forEach items="${question.choices}" var="choice">
 									<li>
 										<c:choose>
 											<c:when test="${question.type eq 'SingleChoice'}"><input type="radio"/></c:when>
 											<c:when test="${question.type eq 'MultipleChoices'}"><input type="checkbox"/></c:when>
 										</c:choose>
-									${choice.text}
+									${choice.description}
 									</li>
 								</c:forEach>
 							</ol>					

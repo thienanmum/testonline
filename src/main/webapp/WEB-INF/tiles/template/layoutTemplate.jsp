@@ -3,21 +3,16 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<c:set var="title"><tiles:getAsString name="title" /></c:set>			
-<title><spring:message code="${title}"/></title>
-
-<link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-
-<link href='<spring:url value="/resource/site.css" />'	rel="stylesheet">
-
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<c:set var="title"><tiles:getAsString name="title" /></c:set>			
+	<title><spring:message code="${title}"/></title>
+	<link href='<spring:url value="/resource/css/bootstrap.min.css" />'	rel="stylesheet">
+	<link href='<spring:url value="/resource/css/site.css" />'	rel="stylesheet">
 </head>
 
 <body>
@@ -27,16 +22,14 @@
 			<ul class="nav nav-pills pull-right">
 				<tiles:insertAttribute name="navigation" />
 			</ul>
-			<h3 class="text-muted">Test Online</h3>
+			<h2 class="text-muted">Test Online</h2>
 		</div>
 
 		<div id="breadcrumb">
-			<p>
-				<c:set var="heading"><tiles:getAsString name="heading" /></c:set>			
-	 			<spring:message code="${heading}"/> -
-			     <c:set var="tagline"><tiles:getAsString name="tagline" /></c:set>			
- 				<spring:message code="${tagline}"/>
-			</p>
+			<c:set var="heading"><tiles:getAsString name="heading" /></c:set>			
+				<spring:message code="${heading}"/> -
+			    <c:set var="tagline"><tiles:getAsString name="tagline" /></c:set>			
+			<spring:message code="${tagline}"/>
 		</div>
 
 		<div class="row">
