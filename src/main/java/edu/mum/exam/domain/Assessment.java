@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import edu.mum.registration.domain.Student;
 import edu.mum.registration.domain.User;
 
 @Entity
@@ -28,7 +27,7 @@ public class Assessment implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn
-	private Student student;
+	private User user;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn
@@ -64,12 +63,12 @@ public class Assessment implements Serializable {
 		this.id = id;
 	}
 
-	public Student getStudent() {
-		return student;
+	public User getUser() {
+		return user;
 	}
 
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Exam getExam() {
