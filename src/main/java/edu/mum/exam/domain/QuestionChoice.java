@@ -1,5 +1,7 @@
 package edu.mum.exam.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,16 +11,18 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class QuestionChoice {
+public class QuestionChoice implements Serializable {
+	private static final long serialVersionUID = -529664210324943437L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
 	@NotNull
-	private Integer sortOrder;
+	private Integer displayOrder;
 	
 	@NotEmpty
-	private String text;
+	private String description;
 	
 	private boolean isCorrect;
 
@@ -30,20 +34,20 @@ public class QuestionChoice {
 		this.id = id;
 	}	
 
-	public Integer getSortOrder() {
-		return sortOrder;
+	public Integer getDisplayOrder() {
+		return displayOrder;
 	}
 
-	public void setSortOrder(Integer sortOrder) {
-		this.sortOrder = sortOrder;
+	public void setDisplayOrder(Integer sortOrder) {
+		this.displayOrder = sortOrder;
 	}
 
-	public String getText() {
-		return text;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setDescription(String text) {
+		this.description = text;
 	}
 
 	public boolean isCorrect() {

@@ -4,4 +4,5 @@ import edu.mum.exam.domain.Assessment;
 
 public interface AssessmentService {
 	Assessment CreateAssessmentForExam(Long examId);
+	void saveAssessment(Assessment assessment);
 }

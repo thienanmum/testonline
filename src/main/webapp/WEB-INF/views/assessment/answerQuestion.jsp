@@ -3,8 +3,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 
 <form:form modelAttribute="assessment">
-	<h1>Exam: <c:out value="${assessment.exam.examId}"/></h1>
-	<hr>
 	<div>${assessment.questionNumber}.<c:out value="${assessment.question.description}"/></div>
 	<input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
 	<c:choose>

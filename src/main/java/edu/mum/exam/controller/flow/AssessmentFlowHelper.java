@@ -16,6 +16,6 @@ public class AssessmentFlowHelper {
 	}
 	
 	public void saveAssessment(AssessmentWrapper assessmentWrapper) {
-		
+		assessmentService.saveAssessment(assessmentWrapper.getAssessment());
 	}
 }

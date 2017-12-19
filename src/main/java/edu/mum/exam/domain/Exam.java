@@ -1,5 +1,6 @@
 package edu.mum.exam.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -14,7 +15,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import edu.mum.registration.domain.Professor;
 
 @Entity
-public class Exam {	
+public class Exam implements Serializable {	
+	private static final long serialVersionUID = 4420032127533170394L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;

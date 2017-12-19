@@ -1,5 +1,6 @@
 package edu.mum.exam.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,8 +19,9 @@ import edu.mum.registration.domain.Student;
 import edu.mum.registration.domain.User;
 
 @Entity
-public class Assessment {
-	
+public class Assessment implements Serializable {	
+	private static final long serialVersionUID = -8424889810656014379L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -36,6 +38,7 @@ public class Assessment {
 	 * All the answers of exam questions given by the student.
 	 */
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@JoinColumn
 	private List<Answer> answers;
 	
 	/*
@@ -114,7 +117,7 @@ public class Assessment {
 		answers = new ArrayList<>();
 		for (ExamQuestion examQuestion : exam.getQuestions()) {
 			Answer answer = new Answer();
-			answer.setQuestion(examQuestion.getQuestion());
+			answer.assignQuestion(examQuestion.getQuestion());
 			answers.add(answer);
 		}
 	}

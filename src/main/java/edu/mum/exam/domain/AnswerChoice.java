@@ -1,5 +1,7 @@
 package edu.mum.exam.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class AnswerChoice {
+public class AnswerChoice implements Serializable {
+	private static final long serialVersionUID = 6480435558353156829L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -17,6 +21,8 @@ public class AnswerChoice {
 	@ManyToOne
 	@JoinColumn
 	private QuestionChoice questionChoice;
+	
+	private boolean selected;
 
 	public Long getId() {
 		return id;
@@ -33,4 +39,13 @@ public class AnswerChoice {
 	public void setQuestionChoice(QuestionChoice questionChoice) {
 		this.questionChoice = questionChoice;
 	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+	
 }

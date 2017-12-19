@@ -1,5 +1,6 @@
 package edu.mum.exam.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Answer {
+public class Answer implements Serializable {
+	private static final long serialVersionUID = 4277685387048491691L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -35,6 +38,7 @@ public class Answer {
 	 * Answer for the single choice and multiple choices question
 	 */
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn
 	List<AnswerChoice> choices;
 
 	public Long getId() {

@@ -27,4 +27,10 @@ public class AssessmentServiceImpl implements AssessmentService {
 		assessment.assignExam(exam);
 		return assessment;
 	}
+
+	@Override
+	public void saveAssessment(Assessment assessment) {
+		assessmentRepository.save(assessment);		
+	}	
+	
 }

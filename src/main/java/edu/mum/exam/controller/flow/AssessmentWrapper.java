@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import edu.mum.exam.domain.Answer;
 import edu.mum.exam.domain.Assessment;
+import edu.mum.exam.domain.Exam;
 import edu.mum.exam.domain.Question;
 
 public class AssessmentWrapper implements Serializable {
@@ -12,10 +13,8 @@ public class AssessmentWrapper implements Serializable {
 	private Assessment assessment;
 	private int currentIndex;
 	
-	// default constructor for used in webflow scopes.
-	public AssessmentWrapper() {
-		
-	}
+	// default constructor for used in web flow scopes.
+	public AssessmentWrapper() {}
 	
 	public AssessmentWrapper(Assessment assessment) {
 		this.assessment = assessment;
@@ -44,11 +43,11 @@ public class AssessmentWrapper implements Serializable {
 		}
 	}
 	
-	public boolean hasNextAnswer() {
+	public boolean getHasNextAnswer() {
 		return currentIndex < assessment.getAnswers().size() - 1;
 	}
 	
-	public boolean hasPreviousAnswer() {
+	public boolean getHasPreviousAnswer() {
 		return currentIndex > 0;
 	}
 	
@@ -56,8 +55,15 @@ public class AssessmentWrapper implements Serializable {
 		return assessment;
 	}
 	
+	public Exam getExam() {
+		return assessment.getExam();
+	}
+	
 	public Question getQuestion() {
 		return getAnswer().getQuestion();
 	}
-
+	
+	public int getQuestionNumber() {
+		return currentIndex + 1;
+	}
 }

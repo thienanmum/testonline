@@ -6,13 +6,17 @@
 
  	<var name="assessment" class="edu.mum.exam.controller.flow.AssessmentWrapper" />
  
+ 	<decision-state id="checkExamId">
+ 		<if test="requestParameters.examId != null" then="createAssessment" else="finish"/>
+ 	</decision-state>
+ 	
  	<action-state id="createAssessment">
  		<evaluate expression="assessmentFlowHelper.createAssessment(requestParameters.examId)" 
  			result="assessment"/>
  		<transition to="answerQuestion"/>
 	</action-state>
  	
-	<view-state id="answerQuestion">
+	<view-state id="answerQuestion" model="assessment" view="assessment/answerQuestion">
 		<transition on="next" to="nextQuestion"/>
 		<transition on="previous" to="previousQuestion"/>
 		<transition on="cancel" to="finish"/>
@@ -31,5 +35,6 @@
 		<transition to="finish"/>
 	</action-state>		
 	
-	<end-state id="finish" />
+	<end-state id="finish" view="externalRedirect:/"/>
+	
 </flow>
