@@ -33,8 +33,8 @@ public class Exam implements Serializable {
     @OneToMany(mappedBy="exam",fetch=FetchType.EAGER)
 	private List<ExamQuestion> questions;
 	
-	@ManyToOne
-	private Professor owner;
+	//@ManyToOne
+	//private Professor owner;
 
 	public Long getId() {
 		return id;
@@ -68,12 +68,12 @@ public class Exam implements Serializable {
 		this.questions = questions;
 	}
 
-	public Professor getOwner() {
+	/*public Professor getOwner() {
 		return owner;
 	}
 
 	public void setOwner(Professor owner) {
 		this.owner = owner;
-	}
+	}*/
 	
 }

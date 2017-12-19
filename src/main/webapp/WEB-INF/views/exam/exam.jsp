@@ -14,7 +14,7 @@
  </div>
 <div id=questions>
 <c:forEach items="${exam.questions}" var="question">
-${question.questionNumber} . ${question.question.text}<br>
+${question.questionNumber} . ${question.question.description}<br>
 </c:forEach>
 </div>
  <div id="existing" style="display:none">	
@@ -22,7 +22,7 @@ ${question.questionNumber} . ${question.question.text}<br>
 	<form:form modelAttribute="examQuestion" id="examQuestion" action="addExamQuestion" method='POST'>
 	<form:errors path="*"/>
 		<c:forEach items="${questions}" var="question">
-		<form:radiobutton value="${question.questionId}" path="question.questionId"/>${question.text}<br>
+		<form:radiobutton value="${question.questionId}" path="question.questionId"/>${question.description}<br>
 		</c:forEach>
 	
 		Grade Point : <form:input path="gradePoint"/><br>
@@ -38,55 +38,6 @@ ${question.questionNumber} . ${question.question.text}<br>
 <input type="button" id="addExisting" onclick="make_visible('existing');make_hidden('new')" value="Add Existing Question"></button>
 </div>
 <div id="new" style="display:none">
-<section class="container">
- 	<div id="errors"></div>
-		<form id="qnForm" class="form-horizontal">
-			<fieldset>
-				<legend>Add new question</legend>
-				<div class="form-group">
-					<label class="control-label col-sm-4" for="questionId"><spring:message code="question.questionId"/></label>
-					<div class="col-sm-6">
-						<input id="questionId" name="questionId" type="text" class="form:input-large"/>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="control-label col-sm-4" for="sortOrder"><spring:message code="question.sortOrder"/></label>
-					<div class="col-sm-6">
-						<div class="form:input-prepend">
-							<input id="sortOrder" name="sortOrder" type="text" class="form:input-large"/>
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="control-label col-sm-4" for="text"><spring:message code="question.text"/></label>
-					<div class="col-sm-6">
-						<textarea id="text" name="text" rows = "2"></textarea>
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label class="control-label col-sm-4" for="type"><spring:message code="question.type"/></label>
-					<div class="col-sm-6">
-						<select id="type" name="type" class="form:input-large">
-							<option value="" label="--Select a Type--"/>
-							<c:forEach items="${questionTypes}" var="qntype">
-							<option value="${qntype}" label="${qntype}"></option>
-							</c:forEach>							
-						</select>
-					</div>
-				</div>		
-				
-				<div class="form-group">
-					<div class="col-lg-offset-2 col-sm-10">
-						<button id="btnAdd" class="btn btn-primary" value ="Add" onclick="addQuestion();"></button>
-					</div>
-					
-				</div>
-				</fieldset>
-		</form>
-	</section>
 	
 </div>
 <div id="save">

@@ -11,7 +11,7 @@
  ${exam.examId} <br>
  ${exam.subject}<br>
  <c:forEach items="${exam.questions}" var="question">
-${question.questionNumber} ${question.question.text} ${question.gradePoint}<br>
+${question.questionNumber} ${question.question.description} ${question.gradePoint}<br>
 </c:forEach>		
  	
 </body>
