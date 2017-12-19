@@ -22,6 +22,13 @@
 									class="glyphicon-info-sign glyphicon" /></span> Details
 								</a>
 							</p>
+							<p>
+								<a
+									href=" <spring:url value="/assessments/start?examId=${exam.id}" /> "
+									class="btn btn-primary"> <span
+									class="glyphicon-info-sign glyphicon" /></span> Take Exam
+								</a>
+							</p>
 
 						</div>
 					</div>

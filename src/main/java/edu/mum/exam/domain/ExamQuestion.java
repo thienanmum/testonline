@@ -57,7 +57,7 @@ public class ExamQuestion implements Serializable {
 	public void setQuestion(Question question) {
 		this.question = question;
 	}
-
+	
 	public Integer getQuestionNumber() {
 		return questionNumber;
 	}
