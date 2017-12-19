@@ -1,7 +1,10 @@
 package edu.mum.exam.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -22,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.mum.exam.domain.Level;
 import edu.mum.exam.domain.Question;
+import edu.mum.exam.domain.QuestionChoice;
 import edu.mum.exam.domain.QuestionType;
 import edu.mum.exam.domain.Subject;
 import edu.mum.exam.exception.ImageNotSaveException;
@@ -61,7 +65,10 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String addQuestion(@ModelAttribute("question") Question question) {		
+	public String addQuestion(@ModelAttribute("question") Question question) {
+//		List<QuestionChoice> choices = new ArrayList<QuestionChoice>();
+//		choices.addAll(Arrays.asList(new QuestionChoice[] {new QuestionChoice(), new QuestionChoice(), new QuestionChoice()}));
+//		question.setChoices(choices);
 		return "question/addQuestion";
 	}
 	
