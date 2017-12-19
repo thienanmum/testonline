@@ -1,4 +1,4 @@
-package edu.mum.exception;
+package edu.mum.exam.exception;
 
 public class ImageNotSaveException extends RuntimeException {
 

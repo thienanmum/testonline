@@ -5,13 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-<title>PRODUCT EXCEPTION</title>
+<title>EXAM EXCEPTION</title>
 </head>
 <body>
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1 class="alert alert-danger"> ${invalidProductId}</h1>
+				<h1 class="alert alert-danger"> ${invalidExamId}</h1>
 			</div>
 		</div>
 	</section>
@@ -24,8 +24,8 @@
 
 		<div class="container">
 			<p>
-				<a href="<spring:url value="/products" />" class="btn btn-primary">
-					<span class="glyphicon-hand-left glyphicon"></span> products
+				<a href="<spring:url value="/exams" />" class="btn btn-primary">
+					<span class="glyphicon-hand-left glyphicon"></span> exams
 				</a>
 			</p>
 		</div>

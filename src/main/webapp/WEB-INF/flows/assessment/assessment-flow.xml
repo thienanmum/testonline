@@ -14,6 +14,7 @@
  		<evaluate expression="assessmentFlowHelper.createAssessment(requestParameters.examId)" 
  			result="assessment"/>
  		<transition to="answerQuestion"/>
+ 		<transition to="finish" on-exception="edu.mum.exam.exception.ExamNotFoundException"/>
 	</action-state>
  	
 	<view-state id="answerQuestion" model="assessment" view="assessment/answerQuestion">

@@ -29,7 +29,7 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
 	public FlowDefinitionRegistry flowRegistry() {
 		return getFlowDefinitionRegistryBuilder(flowBuilderServices())
                .setBasePath("/WEB-INF/flows")
-               .addFlowLocation("/assessment/assessment-flow.xml", "assessment/start")
+               .addFlowLocation("/assessment/assessment-flow.xml", "assessments/start")
                 .build();
    
 	}
