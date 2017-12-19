@@ -1,11 +1,12 @@
 package edu.mum.exam.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import edu.mum.exam.domain.Level;
 import edu.mum.exam.domain.Question;
 import edu.mum.exam.domain.QuestionType;
+import edu.mum.exam.domain.Subject;
+import edu.mum.exam.exception.ImageNotSaveException;
 import edu.mum.exam.service.QuestionService;
+import edu.mum.exam.service.SubjectService;
+import edu.mum.formatter.LevelFormatter;
 import edu.mum.formatter.QuestionTypeFormatter;
 
 @RequestMapping("/questions")
@@ -30,13 +37,20 @@ public class QuestionController {
 	@Autowired
 	MessageSource messageSource;	
 	@Autowired
-	private QuestionTypeFormatter questionTypeFormatter;
+	private QuestionTypeFormatter questionTypeFormatter;	
 	@Autowired
-	private QuestionService questionService;
-	
+	private LevelFormatter levelFormatter;			
+	@Autowired
+	private QuestionService questionService;	
+	@Autowired
+	private SubjectService subjectService;	
+	@Autowired
+	ServletContext servletContext;
+		
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		binder.addCustomFormatter(questionTypeFormatter);
+		binder.addCustomFormatter(levelFormatter);		
 	}
 	
 	@RequestMapping(value= {"","/"}, method=RequestMethod.GET)
@@ -47,20 +61,36 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String addQuestion(@ModelAttribute("question") Question question) {
+	public String addQuestion(@ModelAttribute("question") Question question) {		
 		return "question/addQuestion";
 	}
 	
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
 	public String showQuestionDetail(@RequestParam("id") Long id, Model model) {
-		model.addAttribute("question", questionService.getQuestionById(id));
+		model.addAttribute("question", questionService.getQuestionById(id));		
 		return "question/question";
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String saveQuestion(@Valid @ModelAttribute("question") Question question, BindingResult result) {
 		if (result.hasErrors()) return "question/addQuestion";
+		
+		//Save question
 		questionService.saveQuestion(question);
+		
+		//Save image
+		MultipartFile image = question.getImage();
+ 		String rootDirectory = servletContext.getRealPath("/"); 		
+ 			
+		//isEmpty means file exists BUT NO Content
+		if (image!=null && !image.isEmpty()) {
+	       try {
+	    	   image.transferTo(new File(rootDirectory+"\\resources\\images\\"+ question.getQuestionId() + ".png"));
+	       } catch (Exception e) {
+			throw new ImageNotSaveException();
+	       }
+		}		
+		
 		return "redirect:/questions/";
 	}
 	
@@ -72,5 +102,20 @@ public class QuestionController {
 					messageSource.getMessage(type.getClass().getSimpleName()+ "." + type.name(), null, locale));
 		}
 		return questionTypes;
+	}	
+		
+	@ModelAttribute("levels")
+	Map<String, String> getLevels(Locale locale) {
+		Map<String, String> levels = new HashMap<>();
+		for (Level level : Level.values()) {
+			levels.put(level.name(), 
+					messageSource.getMessage(level.getClass().getSimpleName()+ "." + level.name(), null, locale));
+		}
+		return levels;
+	}
+	
+	@ModelAttribute("subjects")
+	Iterable<Subject> getSubjects(Locale locale){
+		return subjectService.getAllSubjects();
 	}
 }

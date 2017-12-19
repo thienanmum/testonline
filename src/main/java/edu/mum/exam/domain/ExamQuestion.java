@@ -1,5 +1,7 @@
 package edu.mum.exam.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,8 +12,9 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class ExamQuestion {
-	
+public class ExamQuestion implements Serializable {
+	private static final long serialVersionUID = -1827121167596610424L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -30,7 +33,7 @@ public class ExamQuestion {
 	private Integer questionNumber;
 	
 	private Integer gradePoint;
-	
+
 	public Long getId() {
 		return id;
 	}

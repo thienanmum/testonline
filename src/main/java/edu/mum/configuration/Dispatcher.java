@@ -63,8 +63,6 @@ public class Dispatcher extends WebMvcConfigurerAdapter {
 	@Bean
 	public LocaleResolver localeResolver(){
 		   SessionLocaleResolver resolver = new SessionLocaleResolver();
-//		   CookieLocaleResolver resolver = new CookieLocaleResolver();
-//		   AcceptHeaderLocaleResolver resolver = new AcceptHeaderLocaleResolver();
 		   resolver.setDefaultLocale(new Locale("en"));
 	   
 	   return resolver;
@@ -73,7 +71,8 @@ public class Dispatcher extends WebMvcConfigurerAdapter {
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("messages");
+        messageSource.setBasenames("messages", "assessment/messages", "question/messages", 
+        		"user/messages", "exam/messages");
         messageSource.setDefaultEncoding("UTF-8");   //Allows characters [ e.g. Chinese] in .properties
         return messageSource;
     }

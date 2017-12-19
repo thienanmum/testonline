@@ -2,6 +2,7 @@
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
@@ -10,37 +11,22 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import edu.mum.registration.exception.NoProductsFoundUnderCategoryException;
-import edu.mum.registration.exception.ProductNotFoundException;
+import edu.mum.exam.exception.ExamNotFoundException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-	   public static final String DEFAULT_ERROR_VIEW = "error";
+		private static final Logger logger = Logger.getLogger(ControllerExceptionHandler.class);
+		
+		public static final String DEFAULT_ERROR_VIEW = "error";
 
-	   // Either this Method...OR 
-	   // remove and put @ResponseStatus on NoProductsFoundUnderCategoryException class
-	   @ResponseStatus(value=HttpStatus.NOT_FOUND, reason="No products found under this category")
-	   @ExceptionHandler(NoProductsFoundUnderCategoryException.class)
-	   public void noCategoryProducts() {
-		        return  ;
-		    }
-		
-		  
-//	// Either this Method HERE ...OR remove and put it in ProductController
-//		@ExceptionHandler(ProductNotFoundException.class)
-//		public ModelAndView handleError(HttpServletRequest req, ProductNotFoundException exception) {
-//			 ModelAndView mav = new ModelAndView();
-//			 mav.addObject("invalidProductId", exception.getFullMessage());
-// 			 mav.setViewName("productNotFound");
-//			 return mav;
-//		}
-		
-		@ExceptionHandler(value = AccessDeniedException.class)
-	    public String accessDenied() {
-	        return  "error-forbidden";
-	    }
-		 
+		@ExceptionHandler(ExamNotFoundException.class)
+		public ModelAndView handleError(HttpServletRequest req, ExamNotFoundException exception) {
+			 ModelAndView mav = new ModelAndView();
+			 mav.addObject("invalidExamId", exception.getFullMessage());
+ 			 mav.setViewName("examNotFound");
+			 return mav;
+		}
 //		// BIG BUCKET
 //	    @ExceptionHandler(value = Exception.class)
 //	    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {

@@ -13,16 +13,20 @@
 					<div class="thumbnail">					
 						<div class="caption">
 							<h3>${question.questionId}</h3>
-							<p>${question.text}</p>
+							<p>${question.description}</p>
 							<!-- <p><spring:message code="QuestionType.${question.type}" /></p>  -->
-							<ol>
+							
+							<img src="<c:url value ="/resource/images/${question.questionId}.png"/>" alt="This is the question image" height="150" width="150"/>
+							
+							
+							<ol class="choices">
 								<c:forEach items="${question.choices}" var="choice">
 									<li>
 										<c:choose>
 											<c:when test="${question.type eq 'SingleChoice'}"><input type="radio"/></c:when>
 											<c:when test="${question.type eq 'MultipleChoices'}"><input type="checkbox"/></c:when>
 										</c:choose>
-									${choice.text}
+									${choice.description}
 									</li>
 								</c:forEach>
 							</ol>					
@@ -35,6 +39,7 @@
 							</p>
 
 						</div>
+
 					</div>
 				</div>
 			</c:forEach>
@@ -42,3 +47,4 @@
 	</section>
 </body>
 </html>
+

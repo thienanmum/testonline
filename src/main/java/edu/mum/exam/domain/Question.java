@@ -1,5 +1,6 @@
 package edu.mum.exam.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
@@ -7,9 +8,14 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Question {
+public class Question implements Serializable {
+	private static final long serialVersionUID = -3791223009473505104L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -17,15 +23,24 @@ public class Question {
 	@NotEmpty
 	private String questionId;
 	
-	@NotEmpty
-	private String text;
-	
-	@NotNull
-	private Integer sortOrder;
-	
-	private String topic;
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.REFRESH)
+	@JoinColumn(name="subject")
+	@Valid
+	private Subject subject;
 	
 	@Enumerated(EnumType.STRING)
+	@NotNull
+	private Level level;
+	
+	@NotEmpty
+	private String description;
+	
+	@JsonIgnore
+	@Transient
+	private MultipartFile image;
+		
+	@Enumerated(EnumType.STRING)
+	@NotNull
 	private QuestionType type;
 	
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
@@ -48,20 +63,12 @@ public class Question {
 		this.questionId = questionId;
 	}
 
-	public String getText() {
-		return text;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public Integer getSortOrder() {
-		return sortOrder;
-	}
-
-	public void setSortOrder(Integer sortOrder) {
-		this.sortOrder = sortOrder;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public QuestionType getType() {
@@ -79,6 +86,7 @@ public class Question {
 	public void setChoices(List<QuestionChoice> choices) {
 		this.choices = choices;
 	}
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -88,5 +96,29 @@ public class Question {
 						return true;
 				}
 		return false;
+	}
+
+	public Subject getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+
+	public Level getLevel() {
+		return level;
+	}
+
+	public void setLevel(Level level) {
+		this.level = level;
+	}
+
+	public MultipartFile getImage() {
+		return image;
+	}
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
 	}
 }
