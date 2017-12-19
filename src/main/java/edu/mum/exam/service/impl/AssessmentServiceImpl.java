@@ -47,6 +47,12 @@ public class AssessmentServiceImpl implements AssessmentService {
 	@Override
 	public Assessment getAssessmentById(Long id) {
 		return assessmentRepository.findOne(id);
+	}
+
+	@Override
+	public List<Assessment> getUserAssessments(Long userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 	
 }
