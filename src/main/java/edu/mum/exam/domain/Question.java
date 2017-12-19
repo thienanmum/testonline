@@ -13,7 +13,7 @@ public class Question {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
+	@Column(unique=true)
 	@NotEmpty
 	private String questionId;
 	
@@ -78,5 +78,15 @@ public class Question {
 
 	public void setChoices(List<QuestionChoice> choices) {
 		this.choices = choices;
+	}
+	@Override
+	public boolean equals(Object o)
+	{
+		if(o.getClass().equals(this.getClass()))
+				{
+				if (((Question) o).getQuestionId().equals(this.getQuestionId()))
+						return true;
+				}
+		return false;
 	}
 }

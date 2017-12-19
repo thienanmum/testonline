@@ -20,6 +20,8 @@ public class ExamQuestion {
 	@JoinColumn
 	private Exam exam;
 	
+	
+
 	@ManyToOne
 	@JoinColumn
 	private Question question;
@@ -28,5 +30,45 @@ public class ExamQuestion {
 	private Integer questionNumber;
 	
 	private Integer gradePoint;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Exam getExam() {
+		return exam;
+	}
+
+	public void setExam(Exam exam) {
+		this.exam = exam;
+	}
+
+	public Question getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+
+	public Integer getQuestionNumber() {
+		return questionNumber;
+	}
+
+	public void setQuestionNumber(Integer questionNumber) {
+		this.questionNumber = questionNumber;
+	}
+
+	public Integer getGradePoint() {
+		return gradePoint;
+	}
+
+	public void setGradePoint(Integer gradePoint) {
+		this.gradePoint = gradePoint;
+	}
 	
 }

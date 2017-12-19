@@ -27,34 +27,34 @@ public class ControllerExceptionHandler {
 		    }
 		
 		  
-	// Either this Method HERE ...OR remove and put it in ProductController
-		@ExceptionHandler(ProductNotFoundException.class)
-		public ModelAndView handleError(HttpServletRequest req, ProductNotFoundException exception) {
-			 ModelAndView mav = new ModelAndView();
-			 mav.addObject("invalidProductId", exception.getFullMessage());
- 			 mav.setViewName("productNotFound");
-			 return mav;
-		}
+//	// Either this Method HERE ...OR remove and put it in ProductController
+//		@ExceptionHandler(ProductNotFoundException.class)
+//		public ModelAndView handleError(HttpServletRequest req, ProductNotFoundException exception) {
+//			 ModelAndView mav = new ModelAndView();
+//			 mav.addObject("invalidProductId", exception.getFullMessage());
+// 			 mav.setViewName("productNotFound");
+//			 return mav;
+//		}
 		
 		@ExceptionHandler(value = AccessDeniedException.class)
 	    public String accessDenied() {
 	        return  "error-forbidden";
 	    }
 		 
-		// BIG BUCKET
-	    @ExceptionHandler(value = Exception.class)
-	    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-	        // If the exception is annotated with @ResponseStatus rethrow it and let
-	        // the framework handle it -  
-	        if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null)
-	            throw e;
-
-	        // Otherwise setup and send the user to a default error-view.
-	        ModelAndView mav = new ModelAndView();
-	        mav.addObject("exception", e);
-	        mav.addObject("url", req.getRequestURL());
-	        mav.setViewName(DEFAULT_ERROR_VIEW);
-	        return mav;
-	    }
+//		// BIG BUCKET
+//	    @ExceptionHandler(value = Exception.class)
+//	    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+//	        // If the exception is annotated with @ResponseStatus rethrow it and let
+//	        // the framework handle it -  
+//	        if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null)
+//	            throw e;
+//
+//	        // Otherwise setup and send the user to a default error-view.
+//	        ModelAndView mav = new ModelAndView();
+//	        mav.addObject("exception", e);
+//	        mav.addObject("url", req.getRequestURL());
+//	        mav.setViewName(DEFAULT_ERROR_VIEW);
+//	        return mav;
+//	    }
 
 }
