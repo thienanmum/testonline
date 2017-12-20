@@ -88,6 +88,4 @@ public class Dispatcher extends WebMvcConfigurerAdapter {
     public Validator getValidator(){
        return validator();
     }
-
-     
 }

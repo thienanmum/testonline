@@ -1,5 +1,8 @@
 package edu.mum.exam.controller;
 
+import java.security.Principal;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,26 +13,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.mum.exam.service.AssessmentService;
+import edu.mum.registration.controller.ControllerExceptionHandler;
 import edu.mum.registration.domain.User;
+import edu.mum.registration.service.UserService;
 
 @Controller
 @RequestMapping("assessments")
 public class AssessmentController {
 	
+	private static final Logger logger = Logger.getLogger(ControllerExceptionHandler.class);
+	
 	@Autowired
-	AssessmentService assessmentService;
+	AssessmentService assessmentService;	
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping(value= {"", "/"}, method=RequestMethod.GET)
-	public String list(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = (User) auth.getPrincipal();
+	public String list(Model model, Principal pricipal) {
+		User user = userService.getUserByUsername(pricipal.getName());	
+		logger.info("USER ID:" + user.getId());
 		model.addAttribute("assessments", assessmentService.getUserAssessments(user.getId()));
 		return "assessment/assessments";
 	}
 	
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
 	public String showAssessmentDetail(@RequestParam("id") Long id, Model model) {
-		model.addAttribute("question", assessmentService.getAssessmentById(id));		
+		model.addAttribute("assessment", assessmentService.getAssessmentById(id));		
 		return "assessment/assessment";
 	}
 }

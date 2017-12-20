@@ -12,11 +12,11 @@
 		<c:choose>
 			<c:when test="${assessment.question.type eq 'FreeText'}">
 				<div class="row">
-					<form:textarea id="answerdescription" path="answer.description"/>
+					<form:textarea id="answerdescription" path="answer.description" rows = "5" cols="100"/>
 				</div>
 			</c:when>
 			<c:otherwise>	
-				<ol class="choices row">
+				<ol class="choices">
 				<c:forEach items="${assessment.question.choices}" var="choice" varStatus="loop">
 					<li>
 						<c:choose>
@@ -33,7 +33,7 @@
 				</ol>
 			</c:otherwise>
 		</c:choose>	
-		<div>	
+		<div class="buttons">	
 			<c:if test="${assessment.hasPreviousAnswer}">
 				<button  class="btn" id="previous" name="_eventId_previous">Previous</button>
 			</c:if>	

@@ -17,7 +17,7 @@
 			  	<div class="panel-body">
 			  	<c:if test="${not empty error}">
 					<div class="alert alert-danger">
-						<spring:message code="AbstractUserDetailsAuthenticationProvider.badCredentials"/><br />
+						<spring:message code="Login.badCredentials"/><br />
 					</div>
 				</c:if>
 			    	<form action="<c:url value="/login"></c:url>" method="post">
@@ -28,7 +28,7 @@
 			    		<div class="form-group">
 			    			<input class="form-control" placeholder="Password" name='password'  type="password" value="">
 			    		</div>
-			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+			    		<input class="btn" type="submit" value="Login">
 			    	</fieldset>
 			      	</form>
 			    </div>

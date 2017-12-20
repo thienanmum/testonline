@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import edu.mum.exam.domain.Assessment;
@@ -13,6 +15,8 @@ import edu.mum.exam.exception.ExamNotFoundException;
 import edu.mum.exam.repository.AssessmentRepository;
 import edu.mum.exam.repository.ExamRepository;
 import edu.mum.exam.service.AssessmentService;
+import edu.mum.registration.domain.User;
+import edu.mum.registration.repository.UserRepository;
 
 @Service
 @Transactional
@@ -22,6 +26,8 @@ public class AssessmentServiceImpl implements AssessmentService {
 	AssessmentRepository assessmentRepository;	
 	@Autowired
 	ExamRepository examRepository;
+	@Autowired
+	UserRepository userRepository;
 	
 	@Override
 	public Assessment CreateAssessmentForExam(Long examId) {
@@ -36,6 +42,10 @@ public class AssessmentServiceImpl implements AssessmentService {
 
 	@Override
 	public void saveAssessment(Assessment assessment) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userName = ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername();
+		User user = userRepository.findUserByUsername(userName);
+		assessment.setUser(user);
 		assessmentRepository.save(assessment);		
 	}
 
@@ -51,8 +61,6 @@ public class AssessmentServiceImpl implements AssessmentService {
 
 	@Override
 	public List<Assessment> getUserAssessments(Long userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}	
-	
+		return assessmentRepository.findAssessmentsByUserId(userId);
+	}
 }

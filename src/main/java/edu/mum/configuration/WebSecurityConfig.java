@@ -46,15 +46,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.formLogin()
-			.loginPage("/login");
-//			.defaultSuccessUrl("/market/products/add")
-//			.failureUrl("/login?error");
-		httpSecurity.logout().logoutSuccessUrl("/login?logout");
+			.loginPage("/login").permitAll()
+			.defaultSuccessUrl("/welcome")
+			.failureUrl("/loginfailed");
+		httpSecurity.logout().logoutUrl("/logout").deleteCookies().logoutSuccessUrl("/login");
 		httpSecurity.exceptionHandling().accessDeniedPage("/login?accessDenied");
 		httpSecurity.authorizeRequests()
-			.antMatchers("/").permitAll()
-			.antMatchers("/**/add").access("hasRole('ADMIN')")
-			.antMatchers("/**/market/**").access("hasRole('USER')");
+			.antMatchers("/").authenticated()
+			.antMatchers("/questions/add").hasRole("PROFESSOR")
+			.antMatchers("/exam/addExam").hasRole("PROFESSOR");
+			
 		httpSecurity.csrf().disable();
 	}
 	

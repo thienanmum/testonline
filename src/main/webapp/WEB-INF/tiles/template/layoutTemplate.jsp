@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,15 +17,21 @@
 </head>
 
 <body>
-
 	<div class="container">
-		<div class="header">
+		<div>	
 			<ul class="nav nav-pills pull-right">
 				<tiles:insertAttribute name="navigation" />
-			</ul>
-			<h2 class="text-muted">Test Online</h2>
+			</ul>	
+			<h2>Test Online</h2>	
+			<security:authorize access="isAuthenticated()">		
+				<div>
+					<spring:message code="welcome.message"/>
+	   				<security:authentication property="principal.username" />!
+	   				<a href="<c:url value='/logout'/>">Logout |</a>				
+					<span><a href="?language=en" >English</a> | <a href="?language=nl_NL" >Vietnamese</a></span>
+				</div>
+			</security:authorize>	
 		</div>
-
 		<div id="breadcrumb">
 			<c:set var="heading"><tiles:getAsString name="heading" /></c:set>			
 				<spring:message code="${heading}"/> -

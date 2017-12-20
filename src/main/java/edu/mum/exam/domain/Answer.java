@@ -2,7 +2,9 @@ package edu.mum.exam.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Answer implements Serializable {
@@ -25,10 +28,16 @@ public class Answer implements Serializable {
 	/**
 	 * The question that is this answer for.
 	 */
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn
 	private Question question;
 	
+	/**
+	 * The question number of the corresponding question in the exam
+	 */
+	@NotNull
+	private Integer questionNumber;
+
 	/**
 	 * Answer for the FreeText question
 	 */
@@ -38,8 +47,8 @@ public class Answer implements Serializable {
 	 * Answer for the single choice and multiple choices question
 	 */
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn
-	List<AnswerChoice> choices;
+	@JoinColumn(name="answer_id")
+	Set<AnswerChoice> choices;
 
 	public Long getId() {
 		return id;
@@ -57,6 +66,14 @@ public class Answer implements Serializable {
 		this.question = question;
 	}
 
+	public Integer getQuestionNumber() {
+		return questionNumber;
+	}
+
+	public void setQuestionNumber(Integer questionNumber) {
+		this.questionNumber = questionNumber;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -66,18 +83,21 @@ public class Answer implements Serializable {
 	}
 
 	public List<AnswerChoice> getChoices() {
-		return choices;
-	}
-
-	public void setChoices(List<AnswerChoice> choices) {
-		this.choices = choices;
+		List<AnswerChoice> result = new ArrayList<>(choices);
+		result.sort((a,b) -> a.getQuestionChoice().getDisplayOrder().compareTo(
+				b.getQuestionChoice().getDisplayOrder()));
+		return result;
 	}
 	
+	/**
+	 * Create an Answer choice corresponding to a Question choice.
+	 * @param theQuestion
+	 */
 	public void assignQuestion(Question theQuestion) {
 		question = theQuestion;
 		if (question.getType() == QuestionType.MultipleChoices || 
 			question.getType() == QuestionType.SingleChoice) {
-			choices = new ArrayList<>();
+			choices = new HashSet<>();
 			for (QuestionChoice questionChoice : question.getChoices()) {
 				AnswerChoice answerChoice = new AnswerChoice();
 				answerChoice.setQuestionChoice(questionChoice);
