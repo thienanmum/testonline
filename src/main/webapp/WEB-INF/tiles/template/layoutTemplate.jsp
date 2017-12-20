@@ -31,8 +31,9 @@
 				<div>
 					<spring:message code="welcome.message"/>
 	   				<security:authentication property="principal.username" />!
-	   				<a href="<c:url value='/logout'/>">Logout |</a>				
-					<span><a href="?language=en" >English</a> | <a href="?language=vi" >Vietnamese</a></span>
+	   				<a href="<c:url value='/logout'/>"><spring:message code="welcome.Logout"/> |</a>				
+					<span><a href="?language=en" ><spring:message code="welcome.English"/></a> | <a href="?language=vi" ><spring:message code="welcome.Vietnamese"/></a></span>
+
 				</div>
 			</security:authorize>	
 		</div>

@@ -12,9 +12,7 @@
 
  	<section class="container">
 		<form:form  modelAttribute="question" class="form-horizontal" method="POST" action="add" enctype="multipart/form-data">
-			<fieldset>
-				<legend>Add new question</legend>
-				
+			<fieldset>								
 				<div class="form-group">
 					<label class="control-label col-sm-4" for="questionId"><spring:message code="question.questionId"/></label>
 					<div class="col-sm-6">
