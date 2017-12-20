@@ -80,11 +80,8 @@ public class QuestionController {
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String saveQuestion(@Valid @ModelAttribute("question") Question question, BindingResult result) {
-		if (result.hasErrors()) return "question/addQuestion";
-		
-		//Save question
-		questionService.saveQuestion(question);
-		
+		if (result.hasErrors()) return "question/addQuestion";	
+				
 		//Save image
 		MultipartFile image = question.getImage();
  		String rootDirectory = servletContext.getRealPath("/"); 		
@@ -92,11 +89,16 @@ public class QuestionController {
 		//isEmpty means file exists BUT NO Content
 		if (image!=null && !image.isEmpty()) {
 	       try {
-	    	   image.transferTo(new File(rootDirectory+"\\resources\\images\\"+ question.getQuestionId() + ".png"));
+	    	   String imagePath = rootDirectory+"\\resources\\images\\"+ question.getQuestionId() + ".png";
+	    	   question.setImagePath(imagePath);
+	    	   image.transferTo(new File(imagePath));
 	       } catch (Exception e) {
-			throw new ImageNotSaveException();
+			throw new ImageNotSaveException(question.getQuestionId(), "");
 	       }
 		}
+		
+		//Save question
+		questionService.saveQuestion(question);
 				
 		return "redirect:/questions/";
 	}

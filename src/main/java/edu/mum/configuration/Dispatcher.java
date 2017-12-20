@@ -28,7 +28,7 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
  
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = { "edu.mum.*.controller", "edu.mum.formatter"  })
+@ComponentScan(basePackages = { "edu.mum.*.controller", "edu.mum.formatter", "edu.mum.validator"  })
 @Import({WebFlowConfig.class, TilesConfig.class})
 public class Dispatcher extends WebMvcConfigurerAdapter {
  
@@ -80,10 +80,10 @@ public class Dispatcher extends WebMvcConfigurerAdapter {
     @Bean(name = "validator")
     public LocalValidatorFactoryBean validator() {
        LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
-       bean.setValidationMessageSource(messageSource());
+       bean.setValidationMessageSource(messageSource());       
        return bean;
-    }
-    
+    }    
+        
     @Override
     public Validator getValidator(){
        return validator();
