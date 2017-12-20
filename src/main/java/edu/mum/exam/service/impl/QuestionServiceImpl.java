@@ -1,5 +1,7 @@
 package edu.mum.exam.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +37,10 @@ public class QuestionServiceImpl implements QuestionService {
 	public Question getQuestionById(long questionId) {
 		return questionRepository.findOne(questionId);
 	}
+	@Override
+	public List<Question> getAllQuestionsBySubjectId(long subjectid)
+	{
+		return questionRepository.getAllQuestionsBySubjectId(subjectid);
+	}
+	
 }

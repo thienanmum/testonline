@@ -29,10 +29,10 @@ public class Exam implements Serializable {
 	@Column(unique=true)
 	@NotEmpty
 	private String examId;
-	
-	@NotEmpty
-	private String subject;	
-	
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.REFRESH)
+	@JoinColumn(name="subject")
+	@Valid
+	private Subject subject;		
     @OneToMany(mappedBy="exam",fetch=FetchType.EAGER)
 	private List<ExamQuestion> questions;
 	
@@ -55,11 +55,11 @@ public class Exam implements Serializable {
 		this.examId = examId;
 	}
 
-	public String getSubject() {
+	public Subject getSubject() {
 		return subject;
 	}
-
-	public void setSubject(String subject) {
+	
+	public void setSubject(Subject subject) {
 		this.subject = subject;
 	}
 

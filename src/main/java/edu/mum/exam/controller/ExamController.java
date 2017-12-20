@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import edu.mum.exam.domain.Exam;
@@ -70,6 +71,7 @@ public class ExamController {
 	@RequestMapping(value="/addExam",method=RequestMethod.POST)
 	public String createExam(@ModelAttribute("exam") Exam exam,Model model)
 	{
+		exam.setSubject(subjectService.getSubjectById(exam.getSubject().getId()));
 		model.addAttribute("exam",exam);
 		model.addAttribute("examQuestion",new ExamQuestion());
 		Iterable<Question> questions= questionService.getAllQuestions();		
@@ -84,51 +86,32 @@ public class ExamController {
 			return "exam/exam";
 		}
 		Exam exam=(Exam) map.get("exam");
-		examQuestion.setExam(exam);
-		examQuestion.setQuestion(questionService.getQuestionByquestionId(examQuestion.getQuestion().getQuestionId()));
-		
-		if(exam.getQuestions()==null) { exam.setQuestions(new ArrayList<ExamQuestion>());}	
-		examQuestion.setQuestionNumber(exam.getQuestions().size()+1);
-		exam.getQuestions().add(examQuestion);
-		examService.save(exam);
-		examService.saveExamQuestion(examQuestion);
-		List<Question> examquestions=new ArrayList<>();
-		for(ExamQuestion eq:exam.getQuestions())
-		{
-			examquestions.add(eq.getQuestion());
-		}
-		Iterable<Question> questions= questionService.getAllQuestions();
-		List<Question> filteredQuestions=new ArrayList<>();
-		for(Question q:questions)
-		{
-			if(!examquestions.contains(q))
-			{
-				filteredQuestions.add(q);
-			}
-		}
-		model.addAttribute("questions",filteredQuestions);
+		examService.addExamQuestionToExam(exam,examQuestion);
+		//List<Question> filteredQuestions=examService.getFilteredQuestions(exam);		
+		//model.addAttribute("questions",filteredQuestions);
 		model.addAttribute("examQuestion",new ExamQuestion());
 		return "redirect:examStatus";
 	}
+	@RequestMapping(value="/addExistingExamQuestion",method=RequestMethod.POST)
+	public String addExistingExamQuestion(@Valid ExamQuestion examQuestion,BindingResult result, ModelMap map,Model model)
+	{
+		if(result.hasErrors())
+		{
+			return "exam/exam";
+		}
+		Exam exam=(Exam) map.get("exam");
+		examService.addExamQuestionToExam(exam,examQuestion);
+		
+		model.addAttribute("examQuestion",new ExamQuestion());
+		return "redirect:examStatus";
+	}
+	
 	@RequestMapping(value="/examStatus",method=RequestMethod.GET)
 	public String addQuestion(@ModelAttribute("examQuestion") ExamQuestion examQuestion,ModelMap map,Model model)
 	{
-		Exam exam=(Exam) map.get("exam");
-		List<Question> examquestions=new ArrayList<>();
-		for(ExamQuestion eq:exam.getQuestions())
-		{
-			examquestions.add(eq.getQuestion());
-		}
-		Iterable<Question> questions= questionService.getAllQuestions();
-		List<Question> filteredQuestions=new ArrayList<>();
-		for(Question q:questions)
-		{
-			if(!examquestions.contains(q))
-			{
-				filteredQuestions.add(q);
-			}
-		}
-		model.addAttribute("questions",filteredQuestions);
+		//Exam exam=(Exam) map.get("exam");
+		//List<Question> filteredQuestions=examService.getFilteredQuestions(exam);
+		//model.addAttribute("questions",filteredQuestions);
 		return "exam/exam";
 	}
 
@@ -146,17 +129,19 @@ public class ExamController {
 		model.addAttribute("exam",exam);		
 		return "exam/details";
 	}
-	@ModelAttribute("questionTypes")
-	Map<String, String> getQuestionTypes(Locale locale) {
-		Map<String, String> questionTypes = new HashMap<>();
-		for (QuestionType type : QuestionType.values()) {
-			questionTypes.put(type.name(), 
-					messageSource.getMessage(type.getClass().getSimpleName()+ "." + type.name(), null, locale));
-		}
-		return questionTypes;
-	}
+	
 	@ModelAttribute("subjects")
 	Iterable<Subject> getSubjects(Locale locale){
 		return subjectService.getAllSubjects();
+	}
+@RequestMapping(value="/addExistingQuestion",method=RequestMethod.GET)
+	@ResponseBody
+	public List<Question> listExistingQuestions(ModelMap map)
+	{		
+		Exam exam=(Exam) map.get("exam");		
+		List<Question> filteredQuestions=examService.getFilteredQuestions(exam);	
+		System.out.println(filteredQuestions.size());
+		return filteredQuestions;
+		
 	}
 }

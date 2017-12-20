@@ -1,25 +1,49 @@
 var contextRoot = "/" + window.location.pathname.split( '/' )[1];
-function addQuestion(){
+function getExistingQuestions(){
 	
 	
-	var dataToSend = JSON.stringify(serializeObject($('#qnForm')));
+	//var dataToSend = JSON.stringify(serializeObject($('#qnForm')));
 	
 	$.ajax({
-		type: 'POST',
-		url: contextRoot + '/addQuestion',
-		dataType: "json",           // Accept header
- 		data:dataToSend,
+		
+		type: 'GET',
+		url: contextRoot + '/exam/addExistingQuestion',
+		dataType: 'json',           // Accept header
+ 		//data:dataToSend,
  		contentType: 'application/json',   // Sends - Content-type
-		success: function(question) {
-			$('#questions').html("");
-			$("#question").append( '<H3 align="center"> New Question <H3>');                
-			$('#question').append("<H4 align='center'>First Name:  " +question.text  + "</h4>"  );			
-			$("#question").append('<h4 align="center"> <a href="#" onclick="toggle_visibility(\'question\');resetForm(\'qnForm\');"><b>EXIT</b> </a> </h4>');
-			make_visible('questions');
+		success: function(questionsList) {
+			$('#existing').html("");
+			var existingHtml="";
+			if(questionsList.length>0)
+			{			
+				 existingHtml+= '<form id="existingForm" action="addExistingExamQuestion" method="POST">';
+					$.each(questionsList,function(i,question){
+						
+					existingHtml+='<input type="radio" value="'+question.questionId+'" name="question.questionId"/>'+question.description+'<br>';
+					});
+					existingHtml+='<div class="form-group">'+
+					'<label for="gradePoint">Grade Point</label>'+
+					'<div class="col-sm-6">'+
+					'<input type="text" path="gradePoint"/></div></div>'+		
+					'<input type=hidden name="questionNumber" value="1"/>'+					
+					'<div class="col-lg-offset-2 col-sm-10">'+
+					'<input type="submit" id="btnAdd" class="btn btn-primary" value ="Add"/></div></form>';
+					make_hidden('buttons');
+			}
+			else
+				{
+				existingHtml='<div style="color:red">No Additional Questions found under this subject!!</div>';
+				make_visible("addNew");
+				make_hidden("addExisting");
+				}
+			$('#existing').html(existingHtml);
+			make_visible('existing');
 			make_hidden('errors');
+			
 		},
 
 		error: function(errorObject){	
+			alert("failure");
 			if (errorObject.responseJSON.errorType == "ValidationError") {
 				$('#errors').html("");
 				$("#errors").append( '<H3 align="center"> Errors found <H3>');             
@@ -29,9 +53,8 @@ function addQuestion(){
  		    		$("#errors").append( error.message + '<br>');
 		    	});
  	 	   
- 	 	        $("#errors").append('<h4 align="center"> <a href="#" onclick="toggle_visibility(\'errors\');resetForm(\'employeeForm\');"><b>EXIT</b> </a> </h4>');
  	 	        make_visible('errors');
-				make_hidden('questions');
+				make_hidden('existing');
 			}
 			else {
 				alert(errorObject.responseJSON.errors(0));   // "non" Validation Error
