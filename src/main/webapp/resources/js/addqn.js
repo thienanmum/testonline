@@ -28,15 +28,18 @@ function getExistingQuestions(){
 					'<input type=hidden name="questionNumber" value="1"/>'+					
 					'<div class="col-lg-offset-2 col-sm-10">'+
 					'<input type="submit" id="btnAdd" class="btn btn-primary" value ="Add"/></div></form>';
+					make_hidden('buttons');
 			}
 			else
 				{
 				existingHtml='<div style="color:red">No Additional Questions found under this subject!!</div>';
+				make_visible("addNew");
+				make_hidden("addExisting");
 				}
 			$('#existing').html(existingHtml);
 			make_visible('existing');
 			make_hidden('errors');
-			make_hidden('buttons');
+			
 		},
 
 		error: function(errorObject){	
