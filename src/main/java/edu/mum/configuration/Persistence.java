@@ -52,9 +52,7 @@ public class Persistence {
     private Properties getJpaProperties() {
         return new Properties() {
             {
- //               setProperty("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
- //              setProperty("hibernate.hbm2ddl.auto", "none");
-                setProperty("hibernate.hbm2ddl.auto", "create");
+                setProperty("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
                 setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
                 setProperty("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
                 setProperty("hibernate.format_sql", environment.getProperty("hibernate.format_sql"));

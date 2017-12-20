@@ -52,11 +52,12 @@ public class QuestionController {
 	@Autowired
 	ServletContext servletContext;
 		
+	//region New/Detail/List Question
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		binder.addCustomFormatter(questionTypeFormatter);
 		binder.addCustomFormatter(levelFormatter);		
-	}
+	}	
 	
 	@RequestMapping(value= {"","/"}, method=RequestMethod.GET)
 	public String list(Model model) {
@@ -64,15 +65,11 @@ public class QuestionController {
 		model.addAttribute("questions", questions);
 		return "question/questions";
 	}
+	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String addQuestion(@ModelAttribute("question") Question question) {
 
 		return "question/addQuestion";
-	}
-	@RequestMapping(value="/addToExam", method=RequestMethod.GET)
-	public String addQuestionToExam(@ModelAttribute("question") Question question,@RequestParam("examid") String examId,Model model) {
-		model.addAttribute("examid",examId);
-		return "question/addQuestionToExam";
 	}
 	
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
@@ -83,11 +80,8 @@ public class QuestionController {
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String saveQuestion(@Valid @ModelAttribute("question") Question question, BindingResult result) {
-		if (result.hasErrors()) return "question/addQuestion";
-		
-		//Save question
-		questionService.saveQuestion(question);
-		
+		if (result.hasErrors()) return "question/addQuestion";	
+				
 		//Save image
 		MultipartFile image = question.getImage();
  		String rootDirectory = servletContext.getRealPath("/"); 		
@@ -95,14 +89,28 @@ public class QuestionController {
 		//isEmpty means file exists BUT NO Content
 		if (image!=null && !image.isEmpty()) {
 	       try {
-	    	   image.transferTo(new File(rootDirectory+"\\resources\\images\\"+ question.getQuestionId() + ".png"));
+	    	   String imagePath = rootDirectory+"\\resources\\images\\"+ question.getQuestionId() + ".png";
+	    	   question.setImagePath(imagePath);
+	    	   image.transferTo(new File(imagePath));
 	       } catch (Exception e) {
-			throw new ImageNotSaveException();
+			throw new ImageNotSaveException(question.getQuestionId(), "");
 	       }
 		}
+		
+		//Save question
+		questionService.saveQuestion(question);
 				
 		return "redirect:/questions/";
 	}
+	
+	
+	//region Exam
+	@RequestMapping(value="/addToExam", method=RequestMethod.GET)
+	public String addQuestionToExam(@ModelAttribute("question") Question question,@RequestParam("examid") String examId,Model model) {
+		model.addAttribute("examid",examId);
+		return "question/addQuestionToExam";
+	}
+	
 	@RequestMapping(value="/addToExam", method=RequestMethod.POST)
 	public String saveQuestionAndAddToExam(@Valid @ModelAttribute("question") Question question, BindingResult result,@RequestParam("examid") String examId,RedirectAttributes ra) {
 		if (result.hasErrors()) return "question/addQuestion";
@@ -127,6 +135,7 @@ public class QuestionController {
 			return "redirect:/exam/examStatus";
 		
 	}
+	
 	@ModelAttribute("questionTypes")
 	Map<String, String> getQuestionTypes(Locale locale) {
 		Map<String, String> questionTypes = new HashMap<>();

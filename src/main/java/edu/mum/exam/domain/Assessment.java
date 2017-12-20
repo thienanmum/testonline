@@ -2,8 +2,11 @@ package edu.mum.exam.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -37,20 +40,20 @@ public class Assessment implements Serializable {
 	 * All the answers of exam questions given by the student.
 	 */
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	@JoinColumn
-	private List<Answer> answers;
+	@JoinColumn(name="assessment_id")
+	private Set<Answer> answers;
 	
-	/*
+	/**
 	 * The total core calculated base on the answers of student.
 	 */
 	private Integer score;
 	
-	/*
+	/**
 	 * The time at that student begins the exam.
 	 */
 	private Date startTime;
 	
-	/*
+	/**
 	 * The time at that student finish the exam.
 	 */
 	private Date endTime;
@@ -79,12 +82,14 @@ public class Assessment implements Serializable {
 		this.exam = exam;
 	}
 
+	/**
+	 * Sort the Answers by QuestionNumber before returning the list.
+	 * @return
+	 */
 	public List<Answer> getAnswers() {
-		return answers;
-	}
-
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
+		List<Answer> result = new ArrayList<>(answers);
+		result.sort((Answer a, Answer b) -> a.getQuestionNumber() == null ? 0 : a.getQuestionNumber().compareTo(b.getQuestionNumber()));
+		return result;
 	}
 
 	public Integer getScore() {
@@ -111,11 +116,16 @@ public class Assessment implements Serializable {
 		this.endTime = endTime;
 	}
 	
+	/**
+	 * Create all Answers for all Questions in the given exam.
+	 * @param theExam
+	 */
 	public void assignExam(Exam theExam) {
 		exam = theExam;
-		answers = new ArrayList<>();
+		answers = new HashSet<>();
 		for (ExamQuestion examQuestion : exam.getQuestions()) {
 			Answer answer = new Answer();
+			answer.setQuestionNumber(examQuestion.getQuestionNumber());
 			answer.assignQuestion(examQuestion.getQuestion());
 			answers.add(answer);
 		}

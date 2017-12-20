@@ -8,9 +8,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import edu.mum.validator.QuestionId;
 
 @Entity
 public class Question implements Serializable {
@@ -19,8 +22,10 @@ public class Question implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
 	@Column(unique=true)
 	@NotEmpty
+	@QuestionId
 	private String questionId;
 	
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.REFRESH)
@@ -38,10 +43,13 @@ public class Question implements Serializable {
 	@JsonIgnore
 	@Transient
 	private MultipartFile image;
+	
+	private String imagePath;
 		
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	private QuestionType type;
+		
 	
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name="question_id")
@@ -121,4 +129,12 @@ public class Question implements Serializable {
 	public void setImage(MultipartFile image) {
 		this.image = image;
 	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}	
 }

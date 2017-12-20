@@ -1,4 +1,4 @@
-	package edu.mum.registration.controller;
+package edu.mum.registration.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.mum.exam.exception.ExamNotFoundException;
+import edu.mum.exam.exception.ImageNotSaveException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
@@ -27,20 +28,33 @@ public class ControllerExceptionHandler {
  			 mav.setViewName("examNotFound");
 			 return mav;
 		}
-//		// BIG BUCKET
-//	    @ExceptionHandler(value = Exception.class)
-//	    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-//	        // If the exception is annotated with @ResponseStatus rethrow it and let
-//	        // the framework handle it -  
-//	        if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null)
-//	            throw e;
-//
-//	        // Otherwise setup and send the user to a default error-view.
-//	        ModelAndView mav = new ModelAndView();
-//	        mav.addObject("exception", e);
-//	        mav.addObject("url", req.getRequestURL());
-//	        mav.setViewName(DEFAULT_ERROR_VIEW);
-//	        return mav;
-//	    }
+		
+
+		// BIG BUCKET
+	    @ExceptionHandler(value = Exception.class)
+	    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+	        // If the exception is annotated with @ResponseStatus rethrow it and let
+	        // the framework handle it -  
+	        if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null)
+	            throw e;
+	        logger.error("Unknown Error", e);
+	        // Otherwise setup and send the user to a default error-view.
+	        ModelAndView mav = new ModelAndView();
+	        mav.addObject("exception", e);
+	        mav.addObject("url", req.getRequestURL());
+	        mav.setViewName(DEFAULT_ERROR_VIEW);
+	        return mav;
+	    }
+
+		@ExceptionHandler(ImageNotSaveException.class)
+		public ModelAndView handleImageNotSaveException(HttpServletRequest request, ImageNotSaveException exception) {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("imageNotSaveId", exception.getFullMessage());
+			mav.setViewName("imageNotSave");
+			return mav;
+		}
+		
+		
+
 
 }
