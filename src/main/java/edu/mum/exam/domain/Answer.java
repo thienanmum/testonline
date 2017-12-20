@@ -84,8 +84,8 @@ public class Answer implements Serializable {
 
 	public List<AnswerChoice> getChoices() {
 		List<AnswerChoice> result = new ArrayList<>(choices);
-		result.sort((a,b) -> a.getQuestionChoice().getDisplayOrder().compareTo(
-				b.getQuestionChoice().getDisplayOrder()));
+		result.sort((a,b) -> a.getQuestionChoice().getDisplayOrder() == null? 0 : 
+			a.getQuestionChoice().getDisplayOrder().compareTo(b.getQuestionChoice().getDisplayOrder()));
 		return result;
 	}
 	

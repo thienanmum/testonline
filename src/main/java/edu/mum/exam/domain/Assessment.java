@@ -88,7 +88,7 @@ public class Assessment implements Serializable {
 	 */
 	public List<Answer> getAnswers() {
 		List<Answer> result = new ArrayList<>(answers);
-		result.sort((Answer a, Answer b) -> a.getQuestionNumber().compareTo(b.getQuestionNumber()));
+		result.sort((Answer a, Answer b) -> a.getQuestionNumber() == null ? 0 : a.getQuestionNumber().compareTo(b.getQuestionNumber()));
 		return result;
 	}
 

@@ -32,7 +32,7 @@
 					<spring:message code="welcome.message"/>
 	   				<security:authentication property="principal.username" />!
 	   				<a href="<c:url value='/logout'/>">Logout |</a>				
-					<span><a href="?language=en" >English</a> | <a href="?language=nl_NL" >Vietnamese</a></span>
+					<span><a href="?language=en" >English</a> | <a href="?language=vi" >Vietnamese</a></span>
 				</div>
 			</security:authorize>	
 		</div>
