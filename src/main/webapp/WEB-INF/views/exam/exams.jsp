@@ -13,7 +13,7 @@
 					<div class="thumbnail">					
 						<div class="caption">
 							<h3>${exam.examId}</h3>
-							<p>${exam.subject}</p>
+							<p>${exam.subject.name}</p>
 							
 							<p>
 								<a

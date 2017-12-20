@@ -17,11 +17,11 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label col-sm-4" for="subject"><spring:message code="exam.subject"/></label>
+					<label class="control-label col-sm-4" for="subject.id"><spring:message code="exam.subject"/></label>
 					<div class="col-sm-6">												
-						<form:select id="subject" path="subject" class="width200">
+						<form:select id="subject" path="subject.id" class="width200">
 							<form:option value="" label="---Select a subject---"/>
-							<form:options items="${subjects}" itemLabel="name" itemValue="name"/>
+							<form:options items="${subjects}" itemLabel="name" itemValue="id"/>
 						</form:select>	
 						<form:errors path="subject" cssClass="text-danger"/>					
 					</div>

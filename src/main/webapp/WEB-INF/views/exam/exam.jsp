@@ -9,9 +9,10 @@
 	<script type="text/javascript" src="<spring:url value="/resource/js/addqn.js"/>"></script>
 	
  <body>
+
  <div>
  Exam ID : ${exam.examId} <br>
- Subject : ${exam.subject}<br>
+ Subject : ${exam.subject.name}<br>
  </div>
  <c:choose>
  <c:when test="${newquestion!=null}">
@@ -45,22 +46,21 @@
 ${question.questionNumber} . ${question.question.description}<br>
 </c:forEach>
 </div>
+<div id="errors" style="display:none"></div>
  <div id="existing" style="display:none">	
  	<section class="container" >
  	<c:choose>	
 	<c:when test="${questions!=null && fn:length(questions)>0}">
-		<form:form modelAttribute="examQuestion" id="examQuestion" action="addExamQuestion" method='POST'>
-		<form:errors path="*"/>
+		<form:form modelAttribute="examQuestion" id="existingForm" action="addExamQuestion" method='POST'>
 		<c:forEach items="${questions}" var="question">
 		<form:radiobutton value="${question.questionId}" path="question.questionId"/>${question.description}<br>
 		</c:forEach>
 	    <div class="form-group">
-					<label class="control-label col-sm-4" for="gradePoint"><spring:message code="examquestion.gradepoint"/></label>
+					<label for="gradePoint"><spring:message code="examquestion.gradepoint"/></label>
 					<div class="col-sm-6">
 						<form:input path="gradePoint"/>
 					</div>
-		</div>
-		
+		</div>		
 						<form:hidden path="questionNumber" value="1"/>
 				
 		<div class="col-lg-offset-2 col-sm-10">
@@ -77,7 +77,7 @@ ${question.questionNumber} . ${question.question.description}<br>
 </div>	
 <div id="buttons">
 <a href="../questions/addToExam?examid=${exam.examId}"><input type="button" class="btn btn-primary" id="addNew"  value="Add New Question"></a>
-<input type="button" class="btn btn-primary" id="addExisting" onclick="make_visible('existing');make_hidden('new');make_hidden('addNew');make_hidden('addExisting');" value="Add Existing Question"/>
+<input type="button" class="btn btn-primary" id="addExisting" onclick="getExistingQuestions();" value="Add Existing Question"/>
 </div>
 <div id="new" style="display:none">	
 </div>

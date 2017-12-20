@@ -20,5 +20,9 @@ public class SubjectServiceImpl implements SubjectService{
 	public Iterable<Subject> getAllSubjects() {
 		return subjectRepository.findAll();
 	}
+	public Subject getSubjectById(long id)
+	{
+		return subjectRepository.findOne(id);
+	}
 
 }
