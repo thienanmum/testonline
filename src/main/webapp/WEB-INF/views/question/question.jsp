@@ -57,7 +57,34 @@
 				<div class="col-md-4">
 					<form:textarea id="description" path="description" rows = "5" cols="100"/>
 				</div>
-			</div>				
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-sm-4" for="image"><spring:message code="question.image"/></label>
+				<div class="col-sm-6">						
+					<form:input id="image" path="image" type="file"/>
+				</div>
+			</div>					
+					
+									
+			<div id="divQuestionChoice" >			
+				<c:forEach items="${question.choices}" var="choice" varStatus="loop">
+					<div id="0" class="form-group">
+						<label class="control-label col-sm-4" for="questionChoice"><spring:message code="question.questionChoice"/></label>
+						<div class="col-sm-6">
+							<form:input id="questionChoice" path="choices[${loop.index}].description" type="text" class="form:input-large controlWidth"/>						
+							<form:checkbox id="isCorrect" path="choices[${loop.index}].isCorrect"/>						
+							<form:errors path="choices[${loop.index}].description" cssClass="text-danger"/>
+						</div>
+					</div>
+				</c:forEach>									
+									
+			</div>
+			
+			<div class="form-group col-sm-4">
+				<input type="button" id="btnAddQuestionChoice" class="btn btn-primary" value ="Add" onclick="addQuestionChoice('divQuestionChoice');"/>		
+			</div>
+								
 			
 			<div class="form-group">
 				<div class="col-lg-offset-2 col-sm-10">
