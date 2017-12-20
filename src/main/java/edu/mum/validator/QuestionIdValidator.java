@@ -9,7 +9,6 @@ import edu.mum.exam.domain.Question;
 import edu.mum.exam.exception.QuestionNotFoundException;
 import edu.mum.exam.service.QuestionService;
 
-@Component
 public class QuestionIdValidator implements ConstraintValidator<QuestionId, String>{
 		
 	@Autowired

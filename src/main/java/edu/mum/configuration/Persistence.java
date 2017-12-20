@@ -2,6 +2,7 @@ package edu.mum.configuration;
 
 import java.util.Properties;
 
+import javax.persistence.ValidationMode;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("edu.mum.*.repository")
+@ComponentScan(basePackages= {"edu.mum.*.repository"})
 @EnableJpaRepositories("edu.mum.*.repository")
 @PropertySource(value="classpath:application.properties")
 public class Persistence {
@@ -46,6 +47,7 @@ public class Persistence {
         vendorAdapter.setShowSql(true);
         factoryBean.setJpaVendorAdapter(vendorAdapter);
         factoryBean.setJpaProperties(getJpaProperties());
+        factoryBean.setValidationMode(ValidationMode.NONE);
         return factoryBean;
     }
     

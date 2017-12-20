@@ -6,8 +6,7 @@
 <body>
  	<section class="container">
 		<form:form  modelAttribute="exam" class="form-horizontal" method="POST" action="addExam">
-			<fieldset>
-				<legend>Add new Exam</legend>
+			<fieldset>				
 				<div class="form-group">
 					<label class="control-label col-sm-4" for="examId"><spring:message code="exam.examId"/></label>
 					<div class="col-sm-6">
