@@ -18,7 +18,7 @@ public class QuestionChoice implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@NotNull
+	//@NotNull
 	private Integer displayOrder;
 	
 	@NotEmpty
@@ -50,11 +50,11 @@ public class QuestionChoice implements Serializable {
 		this.description = text;
 	}
 
-	public boolean isCorrect() {
+	public boolean getIsCorrect() {
 		return isCorrect;
 	}
 
-	public void setCorrect(boolean isCorrect) {
+	public void setIsCorrect(boolean isCorrect) {
 		this.isCorrect = isCorrect;
 	}
 	

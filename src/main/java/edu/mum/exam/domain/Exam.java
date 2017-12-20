@@ -17,8 +17,7 @@ import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotEmpty;
-
-import edu.mum.registration.domain.Professor;
+import edu.mum.registration.domain.User;
 
 @Entity
 public class Exam implements Serializable {	
@@ -37,8 +36,8 @@ public class Exam implements Serializable {
     @OneToMany(mappedBy="exam",fetch=FetchType.EAGER)
 	private List<ExamQuestion> questions;
 	
-	//@ManyToOne
-	//private Professor owner;
+	@ManyToOne
+	private User owner;
 
 	public Long getId() {
 		return id;
@@ -72,12 +71,12 @@ public class Exam implements Serializable {
 		this.questions = questions;
 	}
 
-	/*public Professor getOwner() {
+	public User getOwner() {
 		return owner;
 	}
 
-	public void setOwner(Professor owner) {
+	public void setOwner(User owner) {
 		this.owner = owner;
-	}*/
+	}
 	
 }
