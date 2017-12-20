@@ -13,7 +13,11 @@
 	<c:set var="title"><tiles:getAsString name="title" /></c:set>			
 	<title><spring:message code="${title}"/></title>
 	<link href='<spring:url value="/resource/css/bootstrap.min.css" />'	rel="stylesheet">
-	<link href='<spring:url value="/resource/css/site.css" />'	rel="stylesheet">
+	<link href='<spring:url value="/resource/css/site.css" />'	rel="stylesheet">	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="<spring:url value="/resource/js/question.js" />"></script>
+	
+	
 </head>
 
 <body>

@@ -15,7 +15,7 @@ ${question.questionNumber} ${question.question.description} ${question.gradePoin
 </c:forEach>
 <div id="update">
 <form id="modify" action="examStatus">
-<input type="submit" value="Modify"/>
+<input type="submit" class="btn btn-primary" value="Modify"/>
 </form>
 </div>
 		
