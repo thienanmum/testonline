@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.mum.exam.domain.Level;
 import edu.mum.exam.domain.Question;
@@ -59,10 +60,14 @@ public class QuestionController {
 		model.addAttribute("questions", questions);
 		return "question/questions";
 	}
-	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String addQuestion(@ModelAttribute("question") Question question) {		
+	public String addQuestion(@ModelAttribute("question") Question question) {
 		return "question/addQuestion";
+	}
+	@RequestMapping(value="/addToExam", method=RequestMethod.GET)
+	public String addQuestionToExam(@ModelAttribute("question") Question question,@RequestParam("examid") String examId,Model model) {
+		model.addAttribute("examid",examId);
+		return "question/addQuestionToExam";
 	}
 	
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
@@ -89,11 +94,34 @@ public class QuestionController {
 	       } catch (Exception e) {
 			throw new ImageNotSaveException();
 	       }
-		}		
-		
+		}
+				
 		return "redirect:/questions/";
 	}
-	
+	@RequestMapping(value="/addToExam", method=RequestMethod.POST)
+	public String saveQuestionAndAddToExam(@Valid @ModelAttribute("question") Question question, BindingResult result,@RequestParam("examid") String examId,RedirectAttributes ra) {
+		if (result.hasErrors()) return "question/addQuestion";
+		
+		//Save question
+		questionService.saveQuestion(question);
+		
+		//Save image
+		MultipartFile image = question.getImage();
+ 		String rootDirectory = servletContext.getRealPath("/"); 		
+ 			
+		//isEmpty means file exists BUT NO Content
+		if (image!=null && !image.isEmpty()) {
+	       try {
+	    	   image.transferTo(new File(rootDirectory+"\\resources\\images\\"+ question.getQuestionId() + ".png"));
+	       } catch (Exception e) {
+			throw new ImageNotSaveException();
+	       }
+		}
+		
+			ra.addFlashAttribute("newquestion",question);
+			return "redirect:/exam/examStatus";
+		
+	}
 	@ModelAttribute("questionTypes")
 	Map<String, String> getQuestionTypes(Locale locale) {
 		Map<String, String> questionTypes = new HashMap<>();

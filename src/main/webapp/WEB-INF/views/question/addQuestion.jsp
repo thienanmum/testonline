@@ -76,7 +76,6 @@
 					</div>
 
 				</div>
-			
 			</fieldset>
 		</form:form>
 	</section>

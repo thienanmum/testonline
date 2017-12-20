@@ -15,13 +15,17 @@
 						<form:errors path="examId" cssClass="text-danger"/>
 					</div>
 				</div>
+				
 				<div class="form-group">
 					<label class="control-label col-sm-4" for="subject"><spring:message code="exam.subject"/></label>
-					<div class="col-sm-6">
-						<form:input id="subject" path="subject" />
+					<div class="col-sm-6">												
+						<form:select id="subject" path="subject" class="width200">
+							<form:option value="" label="---Select a subject---"/>
+							<form:options items="${subjects}" itemLabel="name" itemValue="name"/>
+						</form:select>	
+						<form:errors path="subject" cssClass="text-danger"/>					
 					</div>
 				</div>
-				
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-sm-10">
 						<input type="submit" id="btnAdd" class="btn btn-primary" value ="Add Exam"/>

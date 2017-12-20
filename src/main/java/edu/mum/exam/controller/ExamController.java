@@ -28,8 +28,10 @@ import edu.mum.exam.domain.Exam;
 import edu.mum.exam.domain.ExamQuestion;
 import edu.mum.exam.domain.Question;
 import edu.mum.exam.domain.QuestionType;
+import edu.mum.exam.domain.Subject;
 import edu.mum.exam.service.ExamService;
 import edu.mum.exam.service.QuestionService;
+import edu.mum.exam.service.SubjectService;
 import edu.mum.formatter.QuestionTypeFormatter;
 
 
@@ -43,6 +45,8 @@ public class ExamController {
 	private QuestionTypeFormatter questionTypeFormatter;
 	@Autowired
 	private QuestionService questionService;
+	@Autowired
+	private SubjectService subjectService;	
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		binder.addCustomFormatter(questionTypeFormatter);
@@ -82,8 +86,10 @@ public class ExamController {
 		Exam exam=(Exam) map.get("exam");
 		examQuestion.setExam(exam);
 		examQuestion.setQuestion(questionService.getQuestionByquestionId(examQuestion.getQuestion().getQuestionId()));
-		if(exam.getQuestions()==null) { exam.setQuestions(new ArrayList<ExamQuestion>());}
-		exam.getQuestions().add(examQuestion);		
+		
+		if(exam.getQuestions()==null) { exam.setQuestions(new ArrayList<ExamQuestion>());}	
+		examQuestion.setQuestionNumber(exam.getQuestions().size()+1);
+		exam.getQuestions().add(examQuestion);
 		examService.save(exam);
 		examService.saveExamQuestion(examQuestion);
 		List<Question> examquestions=new ArrayList<>();
@@ -149,5 +155,8 @@ public class ExamController {
 		}
 		return questionTypes;
 	}
-
+	@ModelAttribute("subjects")
+	Iterable<Subject> getSubjects(Locale locale){
+		return subjectService.getAllSubjects();
+	}
 }
