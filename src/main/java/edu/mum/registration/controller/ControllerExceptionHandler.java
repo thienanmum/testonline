@@ -1,4 +1,4 @@
-	package edu.mum.registration.controller;
+package edu.mum.registration.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.mum.exam.exception.ExamNotFoundException;
+import edu.mum.exam.exception.ImageNotSaveException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
@@ -28,6 +29,7 @@ public class ControllerExceptionHandler {
 			 return mav;
 		}
 		
+
 		// BIG BUCKET
 	    @ExceptionHandler(value = Exception.class)
 	    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
@@ -43,5 +45,16 @@ public class ControllerExceptionHandler {
 	        mav.setViewName(DEFAULT_ERROR_VIEW);
 	        return mav;
 	    }
+
+		@ExceptionHandler(ImageNotSaveException.class)
+		public ModelAndView handleImageNotSaveException(HttpServletRequest request, ImageNotSaveException exception) {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("imageNotSaveId", exception.getFullMessage());
+			mav.setViewName("imageNotSave");
+			return mav;
+		}
+		
+		
+
 
 }

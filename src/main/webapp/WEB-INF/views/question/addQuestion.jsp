@@ -69,20 +69,38 @@
 					<div class="col-sm-6">						
 						<form:input id="image" path="image" type="file"/>
 					</div>
-				</div>					
-					
-									
-				<div id="divQuestionChoice" >
-					<div id="0" class="form-group">
-						<label class="control-label col-sm-4" for="questionChoice"><spring:message code="question.questionChoice"/></label>
-						<div class="col-sm-6">
-							<form:input id="questionChoice" path="choices[0].description" type="text" class="form:input-large controlWidth"/>						
-							<form:checkbox id="isCorrect" path="choices[0].isCorrect"/>						
-							<form:errors path="choices[0].description" cssClass="text-danger"/>
-						</div>					
-					</div>					
-				</div>
+				</div>				
+						
 				
+				<div id="divQuestionChoice" >	
+					<c:choose>
+						<c:when test="${question.choices.size() gt 0}">
+							<c:forEach items="${question.choices}" var="choice" varStatus="loop">
+								<div id="0" class="form-group">
+									<label class="control-label col-sm-4" for="questionChoice"><spring:message code="question.questionChoice"/></label>
+									<div class="col-sm-6">
+										<form:input id="questionChoice" path="choices[${loop.index}].description" type="text" class="form:input-large controlWidth"/>						
+										<form:checkbox id="isCorrect" path="choices[${loop.index}].isCorrect"/>						
+										<form:errors path="choices[${loop.index}].description" cssClass="text-danger"/>
+									</div>
+								</div>
+							</c:forEach>								
+						</c:when>
+						<c:otherwise>									
+							<div id="0" class="form-group">
+								<label class="control-label col-sm-4" for="questionChoice"><spring:message code="question.questionChoice"/></label>
+								<div class="col-sm-6">
+									<form:input id="questionChoice" path="choices[0].description" type="text" class="form:input-large controlWidth"/>						
+									<form:checkbox id="isCorrect" path="choices[0].isCorrect"/>						
+									<form:errors path="choices[0].description" cssClass="text-danger"/>
+								</div>					
+							</div>
+							
+						</c:otherwise>							
+					</c:choose>
+												
+				</div>				
+										
 				<div class="form-group col-sm-4">
 					<input type="button" id="btnAddQuestionChoice" class="btn btn-primary" value ="Add" onclick="addQuestionChoice('divQuestionChoice');"/>		
 				</div>			

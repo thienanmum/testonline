@@ -8,30 +8,29 @@ public class ImageNotSaveException extends RuntimeException {
 	private static final long serialVersionUID = 4335525189191891257L;
 	
 	
-	private Long employeeId;
-	private String message = "Image cannot be saved for this ID ";
+	private String questionId;
+	private String message = "Image cannot be saved for this question ID ";
 	
  	public ImageNotSaveException() {}
 	
-	public ImageNotSaveException(Long employeeId, String message) {
-		this.employeeId = employeeId;
+	public ImageNotSaveException(String questionId, String message) {
+		this.questionId = questionId;
 
-		if (message != null) this.message = message;
+		if (message != null && !message.isEmpty()) this.message = message;
 		
 	}
 	
 	public String getFullMessage() {
-		return (message + employeeId);
+		return (message + questionId);
 	}
 	
-	public Long getEployeeId() {
-		return employeeId;
+	public String getEployeeId() {
+		return questionId;
 	}
 	
-@Override
-public String getLocalizedMessage() {
-	// TODO Auto-generated method stub
-	return super.getLocalizedMessage();
-}
+	@Override
+	public String getLocalizedMessage() {		
+		return super.getLocalizedMessage();
+	}
 
 }
