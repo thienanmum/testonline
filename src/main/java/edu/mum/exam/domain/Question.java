@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -38,6 +39,7 @@ public class Question implements Serializable {
 	private Level level;
 	
 	@NotEmpty
+	@Size(min=0, max=30000, message="{Size.description.validation}")
 	private String description;
 	
 	@JsonIgnore

@@ -16,7 +16,7 @@ public class Subject implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
-	@NotNull
+	@NotNull(message="{NotNull.question.subject}")
 	private Long id;
 	
 	

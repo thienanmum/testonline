@@ -72,3 +72,19 @@ form label {
 #errors {
 	color: red;
 }
+
+.labelDecor{
+	width:120px; 
+	margin-bottom: 15px;
+}
+
+.divDecor{
+	display:inline-block;
+}
+.divButton{	
+	margin-bottom: 20px;
+}
+
+.marginLeft{
+	margin-left:125px;
+}

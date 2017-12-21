@@ -2,8 +2,8 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <li><a href="<spring:url value="/welcome" />"><spring:message code="navigation.Home"/></a></li>
-<li><a href="<spring:url value="/users/" />">User</a></li>
-<li><a href="<spring:url value="/users/addUser" />">Add User</a></li>
+<li><a href="<spring:url value="/users/" />"><spring:message code="navigation.User"/></a></li>
+<li><a href="<spring:url value="/users/addUser" />"><spring:message code="navigation.AddUser"/></a></li>
 <li><a href="<spring:url value="/questions/" />"><spring:message code="navigation.Questions"/></a></li>
 <security:authorize access="hasRole('ROLE_PROFESSOR')">
 <li><a href="<spring:url value="/questions/add" />"><spring:message code="navigation.AddQuestion"/></a></li>
