@@ -22,7 +22,7 @@
 							<form:option value="" label="---Select a subject---"/>
 							<form:options items="${subjects}" itemLabel="name" itemValue="id"/>
 						</form:select>	
-						<form:errors path="subject" cssClass="text-danger"/>					
+						<form:errors path="subject.id" cssClass="text-danger"/>					
 					</div>
 				</div>
 				<div class="form-group">

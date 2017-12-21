@@ -69,8 +69,12 @@ public class ExamController {
 		return "exam/addExam";
 	}
 	@RequestMapping(value="/addExam",method=RequestMethod.POST)
-	public String createExam(@ModelAttribute("exam") Exam exam,Model model)
+	public String createExam(@Valid @ModelAttribute("exam") Exam exam,BindingResult result,Model model)
 	{
+		if(result.hasErrors())
+		{
+			return "exam/addExam";
+		}
 		exam.setSubject(subjectService.getSubjectById(exam.getSubject().getId()));
 		model.addAttribute("exam",exam);
 		model.addAttribute("examQuestion",new ExamQuestion());
@@ -87,8 +91,6 @@ public class ExamController {
 		}
 		Exam exam=(Exam) map.get("exam");
 		examService.addExamQuestionToExam(exam,examQuestion);
-		//List<Question> filteredQuestions=examService.getFilteredQuestions(exam);		
-		//model.addAttribute("questions",filteredQuestions);
 		model.addAttribute("examQuestion",new ExamQuestion());
 		return "redirect:examStatus";
 	}
@@ -109,10 +111,7 @@ public class ExamController {
 	@RequestMapping(value="/examStatus",method=RequestMethod.GET)
 	public String addQuestion(@ModelAttribute("examQuestion") ExamQuestion examQuestion,ModelMap map,Model model)
 	{
-		//Exam exam=(Exam) map.get("exam");
-		//List<Question> filteredQuestions=examService.getFilteredQuestions(exam);
-		//model.addAttribute("questions",filteredQuestions);
-		return "exam/exam";
+				return "exam/exam";
 	}
 
 	@RequestMapping(value="/save",method=RequestMethod.POST)

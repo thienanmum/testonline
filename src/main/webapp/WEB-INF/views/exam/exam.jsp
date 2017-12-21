@@ -76,7 +76,7 @@ ${question.questionNumber} . ${question.question.description}<br>
 	</section>
 </div>	
 <div id="buttons">
-<a href="../questions/addToExam?examid=${exam.examId}"><input type="button" class="btn btn-primary" id="addNew"  value="Add New Question"></a>
+<a href="../questions/addToExam?examid=${exam.examId}&subjectid=${exam.subject.id}"><input type="button" class="btn btn-primary" id="addNew"  value="Add New Question"></a>
 <input type="button" class="btn btn-primary" id="addExisting" onclick="getExistingQuestions();" value="Add Existing Question"/>
 </div>
 <div id="new" style="display:none">	
