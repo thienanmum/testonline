@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,7 @@ public class AssessmentServiceImpl implements AssessmentService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_STUDENT')")
 	public void saveAssessment(Assessment assessment) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userName = ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername();

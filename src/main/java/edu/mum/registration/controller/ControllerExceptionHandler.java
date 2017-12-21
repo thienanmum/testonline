@@ -18,19 +18,22 @@ import edu.mum.exam.exception.ImageNotSaveException;
 public class ControllerExceptionHandler {
 
 		private static final Logger logger = Logger.getLogger(ControllerExceptionHandler.class);
-		
-		public static final String DEFAULT_ERROR_VIEW = "error";
 
+		@ExceptionHandler(value = AccessDeniedException.class)
+	    public String accessDenied(Exception e) {
+			logger.error("Access denied error", e);
+	        return  "error-forbidden" ;
+	    }
+		  
 		@ExceptionHandler(ExamNotFoundException.class)
 		public ModelAndView handleError(HttpServletRequest req, ExamNotFoundException exception) {
-			 ModelAndView mav = new ModelAndView();
-			 mav.addObject("invalidExamId", exception.getFullMessage());
- 			 mav.setViewName("examNotFound");
-			 return mav;
+			logger.error("Exam not found", exception);
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("invalidExamId", exception.getFullMessage());
+ 			mav.setViewName("examNotFound");
+			return mav;
 		}
-		
 
-		// BIG BUCKET
 	    @ExceptionHandler(value = Exception.class)
 	    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
 	        // If the exception is annotated with @ResponseStatus rethrow it and let
@@ -42,7 +45,7 @@ public class ControllerExceptionHandler {
 	        ModelAndView mav = new ModelAndView();
 	        mav.addObject("exception", e);
 	        mav.addObject("url", req.getRequestURL());
-	        mav.setViewName(DEFAULT_ERROR_VIEW);
+	        mav.setViewName("error");
 	        return mav;
 	    }
 
@@ -53,8 +56,4 @@ public class ControllerExceptionHandler {
 			mav.setViewName("imageNotSave");
 			return mav;
 		}
-		
-		
-
-
 }
