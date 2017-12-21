@@ -106,14 +106,15 @@ public class QuestionController {
 	
 	//region Exam
 	@RequestMapping(value="/addToExam", method=RequestMethod.GET)
-	public String addQuestionToExam(@ModelAttribute("question") Question question,@RequestParam("examid") String examId,Model model) {
+	public String addQuestionToExam(@ModelAttribute("question") Question question,@RequestParam("examid") String examId,@RequestParam("subjectid") String subjectId,Model model) {
 		model.addAttribute("examid",examId);
+		model.addAttribute("subjectid",subjectId);
 		return "question/addQuestionToExam";
 	}
 	
 	@RequestMapping(value="/addToExam", method=RequestMethod.POST)
 	public String saveQuestionAndAddToExam(@Valid @ModelAttribute("question") Question question, BindingResult result,@RequestParam("examid") String examId,RedirectAttributes ra) {
-		if (result.hasErrors()) return "question/addQuestion";
+		if (result.hasErrors()) return "question/addQuestionToExam";
 		
 		//Save question
 		questionService.saveQuestion(question);

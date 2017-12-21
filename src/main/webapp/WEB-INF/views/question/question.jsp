@@ -25,7 +25,7 @@
 			<div class="form-group">
 				<label class="control-label col-sm-4" for="subject"><spring:message code="question.subject"/></label>
 				<div class="col-sm-6">												
-					<form:select id="subject" path="subject.id" class="controlWidth">
+					<form:select id="subject" path="subject.id" class="controlWidth" >
 						<form:option value="" label="---Select a subject---"/>							
 						<form:options items="${subjects}" itemLabel="name" itemValue="id"/>
 					</form:select>						
@@ -45,7 +45,7 @@
 			<div class="form-group">
 				<label class="control-label col-sm-4" for="type"><spring:message code="question.type"/></label>
 				<div class="col-sm-6">
-					<form:select id="type" path="type" class="controlWidth">
+					<form:select id="type" path="type" class="controlWidth" onchange="showOrHide('#divQuestionChoice')">
 						<form:option value="" label="---Select a type---"/>
 						<form:options items="${questionTypes}"/>
 					</form:select>
@@ -67,7 +67,7 @@
 			</div>					
 					
 									
-			<div id="divQuestionChoice" >			
+			<div id="divQuestionChoice">			
 				<c:forEach items="${question.choices}" var="choice" varStatus="loop">
 					<div id="0" class="form-group">
 						<label class="control-label col-sm-4" for="questionChoice"><spring:message code="question.questionChoice"/></label>
@@ -78,12 +78,12 @@
 						</div>
 					</div>
 				</c:forEach>									
-									
+				<div class="form-group col-sm-4">
+				<input type="button" id="btnAddQuestionChoice" class="btn btn-primary" value ="Add" onclick="addQuestionChoice('divQuestionChoice');"/>		
+				</div>					
 			</div>
 			
-			<div class="form-group col-sm-4">
-				<input type="button" id="btnAddQuestionChoice" class="btn btn-primary" value ="Add" onclick="addQuestionChoice('divQuestionChoice');"/>		
-			</div>
+			
 								
 			
 			<div class="form-group">

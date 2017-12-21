@@ -73,12 +73,12 @@ public class ExamController {
 	public String createExam(@Valid @ModelAttribute("exam") Exam exam, BindingResult result, Model model)
 
 	{
-
+       
 		if(result.hasErrors())
 		{
 			return "exam/addExam";
 		}
-
+		
 
 		exam.setSubject(subjectService.getSubjectById(exam.getSubject().getId()));
 		model.addAttribute("exam",exam);

@@ -18,3 +18,8 @@ function addQuestionChoice(divID){
 	$newDiv.html(replaced);	
 	$newDiv.appendTo($parentDiv);	 
 }
+function showOrHide(div)
+{
+	if($("#type").val=="Free Text") {$(div).css("display:none");}
+	else {$(div).css("display:block");}
+}

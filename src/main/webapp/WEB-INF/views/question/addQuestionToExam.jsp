@@ -82,18 +82,20 @@
 												
 				</div>				
 										
-				<div class="form-group col-sm-4">
-					<input type="button" id="btnAddQuestionChoice" class="btn btn-primary" value ="Add" onclick="addQuestionChoice('divQuestionChoice');"/>		
-				</div>			
+			<div class="form-group">
+				<div class="col-lg-offset-2 col-sm-10">
+					<input type="button" id="btnAddQuestionChoice" class="btn btn-primary" value ="Add Choice" onclick="addQuestionChoice('divQuestionChoice');"/>		
+				</div></div>	
 																			
 								
-				<div class="form-group">
+				
+			<input type=hidden name="subject.id" value="${subjectid}"/>	
+			<input type=hidden name="examid" value="${examid}"/>
+			<div class="form-group">
 					<div class="col-lg-offset-2 col-sm-10">
-						<input type="submit" id="btnAdd" class="btn btn-primary" value ="Update"/>
+						<input type="submit" id="btnAdd" class="btn btn-primary" value ="Add"/>
 					</div>
 				</div>
-			<input type=hidden name="subjectid" value="${subjectId}"/>	
-			<input type=hidden name="examid" value="${examId}"/>
 			</fieldset>
 		</form:form>
 	</section>

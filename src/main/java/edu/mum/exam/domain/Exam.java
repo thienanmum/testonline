@@ -18,6 +18,7 @@ import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import edu.mum.registration.domain.User;
+import edu.mum.validator.ExamId;
 
 @Entity
 public class Exam implements Serializable {	
@@ -28,6 +29,7 @@ public class Exam implements Serializable {
 	private Long id;
 	@Column(unique=true)
 	@NotEmpty
+	@ExamId
 	private String examId;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.REFRESH)
 	@JoinColumn(name="subject")
