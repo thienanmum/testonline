@@ -80,9 +80,16 @@ form label {
 
 .divDecor{
 	display:inline-block;
+	margin-bottom: 15px;
 }
 .divButton{	
 	margin-bottom: 20px;
+}
+
+.imageDecor{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 125px;
 }
 
 .marginLeft{

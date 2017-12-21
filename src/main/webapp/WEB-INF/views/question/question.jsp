@@ -1,12 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-	
-<%--  <link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
- <style><%@include file="/resources/css/site.css"%></style>
- 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	<script type="text/javascript" src="<spring:url value="/resource/js/cart.js"/>"></script> --%>
-	
+		
 
 <section class="container" >
 
@@ -22,23 +17,16 @@
 				</div>
 			</div>
 			
-<<<<<<< HEAD
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="subject"><spring:message code="question.subject"/></label>
-				<div class="col-sm-6">												
-					<form:select id="subject" path="subject.id" class="controlWidth" >
-=======
 			<div >
 				<label class="labelDecor" for="subject"><spring:message code="question.subject"/></label>
 				<div class="divDecor">												
 					<form:select id="subject" path="subject.id" class="controlWidth">
->>>>>>> branch 'master' of https://abinettafa@bitbucket.org/annguyen1502/testonline.git
 						<form:option value="" label="---Select a subject---"/>							
 						<form:options items="${subjects}" itemLabel="name" itemValue="id"/>
 					</form:select>						
 				</div>
 			</div>
-			
+						
 			<div>
 				<label class="labelDecor" for="level"><spring:message code="question.level"/></label>
 				<div class="divDecor">
@@ -49,17 +37,10 @@
 				</div>
 			</div>
 			
-<<<<<<< HEAD
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="type"><spring:message code="question.type"/></label>
-				<div class="col-sm-6">
-					<form:select id="type" path="type" class="controlWidth" onchange="showOrHide('#divQuestionChoice')">
-=======
 			<div >
 				<label class="labelDecor" for="type"><spring:message code="question.type"/></label>
 				<div class="divDecor">
 					<form:select id="type" path="type" class="controlWidth">
->>>>>>> branch 'master' of https://abinettafa@bitbucket.org/annguyen1502/testonline.git
 						<form:option value="" label="---Select a type---"/>
 						<form:options items="${questionTypes}"/>
 					</form:select>
@@ -73,7 +54,12 @@
 				</div>
 			</div>
 			
-			<div >
+			<div class="imageDecor">						
+				<c:if test="${question.imagePath ne null}">
+					<img src="<c:url value ="/resource/images/${question.questionId}.png"/>" alt="This is the question image" height="150" width="150"/>
+				</c:if>
+			</div>
+			<div >							
 				<label class="labelDecor" for="image"><spring:message code="question.image"/></label>
 				<div class="divDecor">						
 					<form:input id="image" path="image" type="file"/>
@@ -81,7 +67,7 @@
 			</div>					
 					
 									
-			<div id="divQuestionChoice">			
+			<div id="divQuestionChoice" >			
 				<c:forEach items="${question.choices}" var="choice" varStatus="loop">
 					<div id="0">
 						<label class="labelDecor" for="questionChoice"><spring:message code="question.questionChoice"/></label>
@@ -92,18 +78,12 @@
 						</div>
 					</div>
 				</c:forEach>									
-				<div class="form-group col-sm-4">
-				<input type="button" id="btnAddQuestionChoice" class="btn btn-primary" value ="Add" onclick="addQuestionChoice('divQuestionChoice');"/>		
-				</div>					
+									
 			</div>
 			
-<<<<<<< HEAD
-			
-=======
 			<div class="divButton marginLeft">
 				<input type="button" id="btnAddQuestionChoice" class="btn btn-primary" value ="<spring:message code="button.AddChoice"/>" onclick="addQuestionChoice('divQuestionChoice');"/>		
 			</div>
->>>>>>> branch 'master' of https://abinettafa@bitbucket.org/annguyen1502/testonline.git
 								
 			
 			<div class="divButton">
