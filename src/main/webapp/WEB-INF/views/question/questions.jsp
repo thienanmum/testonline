@@ -31,7 +31,7 @@
 							<a
 								href=" <spring:url value="/questions/detail?id=${question.id}" /> "
 								class="btn btn-primary"> <span
-								class="glyphicon-info-sign glyphicon" /></span> Details
+								class="glyphicon-info-sign glyphicon" /></span> <spring:message code="button.Details"/>
 							</a>
 						</p>
 

@@ -1,13 +1,9 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
-
-<%-- 	<link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-	<style><%@include file="/resources/css/site.css"%></style>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	<script type="text/javascript" src="<spring:url value="/resource/js/question.js" />"></script> --%>
  	 
 
  	<section class="container">
@@ -113,4 +109,5 @@
 			</fieldset>
 		</form:form>
 	</section>
+
 

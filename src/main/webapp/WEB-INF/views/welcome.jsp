@@ -7,6 +7,6 @@
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 
 <body>
- <h1>Welcome to Online Testing</h1>
+ <h1><p style="text-align: center"><spring:message code="welcome.header"/></p></h1>
  </body>
 </html>
