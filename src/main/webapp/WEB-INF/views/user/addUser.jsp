@@ -23,7 +23,17 @@
 						<form:errors path="lastName" cssClass="text-danger"/>
 					</div>
 				</div>
-	
+				
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="userName">User Name</label>
+					<div class="col-lg-10">
+						<div class="form:input-prepend">
+							<form:input id="username" path="userCredentials.username" type="text" class="form:input-large"/>
+							<form:errors path="userCredentials.username" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+				
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="password">Password</label>
 					<div class="col-lg-10">
@@ -48,7 +58,11 @@
 					<label class="control-label col-lg-2" for="authority">Role</label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:input  path="userCredentials.authority[0].authority" type="text" value="ROLE_STUDENT" class="form:input-large"/>
+							<form:select  path="userCredentials.authority[0].authority">
+							<form:option value="ROLE_ADMIN"></form:option>
+							<form:option value="ROLE_PROFESSOR"></form:option>
+							<form:option value="ROLE_STUDENT"></form:option>
+							</form:select>
 							<form:errors path="userCredentials.authority[0].authority" cssClass="text-danger"/>
 						</div>
 					</div>

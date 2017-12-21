@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 	
 	@Autowired
@@ -49,12 +51,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 			.loginPage("/login").permitAll()
 			.defaultSuccessUrl("/welcome")
 			.failureUrl("/loginfailed");
-		httpSecurity.logout().logoutUrl("/logout").deleteCookies().logoutSuccessUrl("/login");
-		httpSecurity.exceptionHandling().accessDeniedPage("/login?accessDenied");
+		httpSecurity.logout().logoutUrl("/logout").deleteCookies("JSESSIONID").logoutSuccessUrl("/login");
+		httpSecurity.exceptionHandling().accessDeniedPage("/accessDenied");
 		httpSecurity.authorizeRequests()
 			.antMatchers("/").authenticated()
-			.antMatchers("/questions/add").hasRole("PROFESSOR")
-			.antMatchers("/exam/addExam").hasRole("PROFESSOR");
+			.antMatchers("/assessments/*").hasRole("STUDENT")
+			.antMatchers("/questions/*").hasRole("PROFESSOR")
+			.antMatchers("/exam/addExam").hasRole("PROFESSOR")
+			.antMatchers("/exam/detail").hasRole("PROFESSOR")
+			.antMatchers("/users/*").hasRole("ADMIN");
 			
 		httpSecurity.csrf().disable();
 	}

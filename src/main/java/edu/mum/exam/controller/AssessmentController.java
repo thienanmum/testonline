@@ -32,7 +32,7 @@ public class AssessmentController {
 	@RequestMapping(value= {"", "/"}, method=RequestMethod.GET)
 	public String list(Model model, Principal pricipal) {
 		User user = userService.getUserByUsername(pricipal.getName());	
-		logger.info("USER ID:" + user.getId());
+		logger.debug(pricipal.getName());
 		model.addAttribute("assessments", assessmentService.getUserAssessments(user.getId()));
 		return "assessment/assessments";
 	}

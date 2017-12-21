@@ -7,8 +7,10 @@
 <div>
 	<c:forEach items="${assessment.answers}" var="answer" varStatus="loop">
 		<div class="question">
-			<p>${loop.index + 1}.${answer.question.description}</p>													
-			<p><img src="<c:url value ="/resource/images/${answer.question.questionId}.png"/>" alt="" height="150" width="150"/></p>
+			<p>${loop.index + 1}.${answer.question.description}</p>	
+			<c:if test="${answer.question.imagePath ne ''}">
+				<img src="<c:url value ="/resource/images/${answer.question.questionId}.png"/>" alt="This is the question image" height="150" width="150"/>
+			</c:if>												
 			<c:if test="${answer.question.type eq 'FreeText'}">
 				<textarea readonly><c:out value="${answer.description}"/></textarea>
 			</c:if>

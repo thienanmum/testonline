@@ -1,13 +1,17 @@
  
-INSERT INTO credentials(username,password,enabled) VALUES ('guest','$2a$10$0.ESlGysrPaiW5HaapKwoehzWt5AibgbPPOvMhDv8D6H26QQ/CwhS', TRUE);
+INSERT INTO credentials(username,password,enabled) VALUES ('student','$2a$10$Of0ng1GgkV0bqGr39BcapeScv5UEKqzHrGzO58PVsfzLwyK76c50i', TRUE);
 INSERT INTO credentials(username,password,enabled) VALUES ('admin','$2a$10$S/wlXEo/APzf.Sn1cO2p4.V12EJmaw.uzrHelMvkpuahjmHWnSafe', TRUE);
-  
-INSERT INTO authority (id,username, authority) VALUES (1,'guest', 'ROLE_STUDENT');
+INSERT INTO credentials(username,password,enabled) VALUES ('professor','$2a$10$vBLWqIwpTijahZ8DBMOZquIs2xFEdCxv3baWEsR5km7eRBM2j1RvW', TRUE);
+
+INSERT INTO authority (id,username, authority) VALUES (1,'student', 'ROLE_STUDENT');
 INSERT INTO authority (id,username, authority) VALUES (2,'admin', 'ROLE_PROFESSOR');
 INSERT INTO authority (id,username, authority) VALUES (3,'admin', 'ROLE_STUDENT');
+INSERT INTO authority (id,username, authority) VALUES (4,'admin', 'ROLE_ADMIN');
+INSERT INTO authority (id,username, authority) VALUES (5,'professor', 'ROLE_PROFESSOR');
  
-INSERT INTO  user(id,firstname, lastname,age,title,membernumber, member_id) VALUES (1,'Curious','George',12,'Boy Monkey', 8754,'admin');
-INSERT INTO user(id,firstname, lastname,age,title,membernumber,member_id) VALUES (2,'Allen','Rench',123,'Torque Master', 8733,'guest');
+INSERT INTO  user(id,firstname, lastname,member_id) VALUES (1,'Thien','Nguyen','admin');
+INSERT INTO user(id,firstname, lastname,member_id) VALUES (2,'Abinet','Tafa','student');
+INSERT INTO user(id,firstname, lastname,member_id) VALUES (3,'Joe','Bruen','professor');
 
 
 insert into subject(id, name) values (1, "English")

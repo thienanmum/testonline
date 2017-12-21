@@ -25,4 +25,10 @@ public class LoginController {
 	public String logout(Model model) {
  		return "/login";
  	}
+	
+	@RequestMapping(value="/accessDenied", method = RequestMethod.GET)
+	public String accessDenied(Model model) {
+ 		return "error-forbidden";
+ 	}
+	
 }

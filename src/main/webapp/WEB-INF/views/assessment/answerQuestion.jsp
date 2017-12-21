@@ -8,7 +8,9 @@
 		<p>Exam: <c:out value="${assessment.exam.examId}"/></p>
 		<hr>
 		<div class="row">${assessment.questionNumber}. <c:out value="${assessment.question.description}"/></div>
-		
+		<c:if test="${assessment.question.imagePath ne ''}">
+			<img src="<c:url value ="/resource/images/${assessment.question.questionId}.png"/>" alt="This is the question image" height="150" width="150"/>
+		</c:if>
 		<c:choose>
 			<c:when test="${assessment.question.type eq 'FreeText'}">
 				<div class="row">

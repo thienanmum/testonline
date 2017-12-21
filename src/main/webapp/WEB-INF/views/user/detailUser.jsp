@@ -14,6 +14,9 @@
 		<div class="form-group">		
 			User Name:${user.userCredentials.username}
 		</div>
+		<div class="form-group">		
+			Role :${user.userCredentials.authority[0].authority}
+		</div>
 	</section>
 </body>
 </html>
