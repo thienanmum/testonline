@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: Abinet
 Build-Jdk: 1.8.0_151
-=======
-Built-By: annguyen
-Build-Jdk: 1.8.0_144
->>>>>>> 069ffd253f82bb88db7f7eac00202d69d13406e3
 Created-By: Maven Integration for Eclipse
 
