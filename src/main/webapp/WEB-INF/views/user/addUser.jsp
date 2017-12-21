@@ -58,7 +58,11 @@
 					<label class="control-label col-lg-2" for="authority">Role</label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:input  path="userCredentials.authority[0].authority" type="text" value="ROLE_STUDENT" class="form:input-large"/>
+							<form:select  path="userCredentials.authority[0].authority">
+							<form:option value="ROLE_ADMIN"></form:option>
+							<form:option value="ROLE_PROFESSOR"></form:option>
+							<form:option value="ROLE_STUDENT"></form:option>
+							</form:select>
 							<form:errors path="userCredentials.authority[0].authority" cssClass="text-danger"/>
 						</div>
 					</div>

@@ -14,7 +14,7 @@
 						<div class="caption">
 							<h3>${user.id}</h3>
 							<h4>First Name - ${user.firstName}</h4>
-							<h4>Last Name -  ${user.lastName}
+							<h4>Last Name -  ${user.lastName}</h4>
 							<p>
 								<a
 									href=" <spring:url value="/users/detail?id=${user.id}" /> "
