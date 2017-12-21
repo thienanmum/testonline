@@ -1,5 +1,6 @@
 package edu.mum.registration.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,8 +12,6 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
-
-import edu.mum.validator.NullMinNumber;
 
 
 @Entity 
@@ -28,25 +27,13 @@ public class User {
 	
 	@Column(length = 16)
 	@NotEmpty
-	@Size(min=5, max = 9, message= "{EmptyOrSize}")
+	@Size(min=5, max = 9)
 	private String lastName;
 
-	@NullMinNumber(value=6)
-	private Integer age;
- 	
-	@Column(length = 32)
-	@NotEmpty
-	private String title;
-	
-	@NullMinNumber(value=6)
- 	private Integer memberNumber;
-
-	@OneToOne(fetch=FetchType.LAZY) 
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL) 
  	@JoinColumn(name="member_id") 
  	UserCredentials userCredentials;
  	
-  
- 
  	public Long getId() {
 		return id;
 	}
@@ -65,31 +52,10 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
- 
-	
  	public UserCredentials getUserCredentials() {
 		return userCredentials;
 	}
 	public void setUserCredentials(UserCredentials userCredentials) {
 		this.userCredentials = userCredentials;
 	}
- 	public Integer getMemberNumber() {
-		return memberNumber;
-	}
-	public void setMemberNumber(Integer memberNumber) {
-		this.memberNumber = memberNumber;
-	}
-	public void setAge(Integer age) {
-		this.age = age;
-	}
- 	public Integer getAge() {
-		return age;
-	}
-
   }

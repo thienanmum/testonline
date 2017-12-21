@@ -17,15 +17,14 @@ import javax.persistence.Transient;
 @Entity(name = "CREDENTIALS")
 public class UserCredentials {
 
-	 @Id
-	 @Column(nullable = false, unique = true)
- 	String username;
-	 @Column(nullable = false)
+	@Id
+	@Column(nullable = false, unique = true)
+	String username;
+	@Column(nullable = false)
 	String password;
 	@Transient
 	String verifyPassword;
 	Boolean enabled;
-
  
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="username") 
