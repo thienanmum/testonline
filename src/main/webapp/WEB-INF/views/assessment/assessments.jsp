@@ -2,27 +2,25 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
  
 <body>
+	<c:if test="${assessments.size() > 0}">
  	<section class="container">
-		<div class="row">
-			<table>
-				<tr>
-					<td>ExamId</td>
-					<td>Subject</td>
-					<td>Start Time</td>
-					<td>End Time</td>
-				</tr>				
-				<c:forEach items="${assessments}" var="assessment">
-				<tr>
-					<td><a href="<spring:url value="/assessments/detail?id=${assessment.id}"/>"> 
-						${assessment.exam.examId} </a></td>
-					<td>${assessment.exam.subject}</td>
-					<td>${assessment.startTime}</td>
-					<td>${assessment.endTime}</td>
-				</tr>
-				</c:forEach>
-			</table>
-		</div>
+		<div class="row">			
+			<span class="col-md-3"><spring:message code="Assessment.ExamId"/></span>
+			<span class="col-md-3"><spring:message code="Assessment.Subject"/></span>
+			<span class="col-md-3"><spring:message code="Assessment.StartTime"/></span>
+			<span class="col-md-3"><spring:message code="Assessment.EndTime"/></span>	
+		</div>			
+		<c:forEach items="${assessments}" var="assessment">
+			<div class="row">
+				<span class="col-md-3"><a href="<spring:url value="/assessments/detail?id=${assessment.id}"/>"> 
+					${assessment.exam.examId} </a></span>
+				<span class="col-md-3">${assessment.exam.subject.name}</span>
+				<span class="col-md-3">${assessment.startTime}</span>
+				<span class="col-md-3">${assessment.endTime}</span>
+			</div>
+		</c:forEach>
 	</section>
+	</c:if>
 </body>
 </html>
 

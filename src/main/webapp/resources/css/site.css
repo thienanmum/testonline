@@ -69,6 +69,6 @@ form label {
     text-align: center;
 }
 
-#errors, li {
+#errors {
 	color: red;
 }

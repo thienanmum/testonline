@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 			.defaultSuccessUrl("/welcome")
 			.failureUrl("/loginfailed");
 		httpSecurity.logout().logoutUrl("/logout").deleteCookies("JSESSIONID").logoutSuccessUrl("/login");
-		//httpSecurity.exceptionHandling().accessDeniedPage("/accessDenied");
+		httpSecurity.exceptionHandling().accessDeniedPage("/accessDenied");
 		httpSecurity.authorizeRequests()
 			.antMatchers("/").authenticated()
 			.antMatchers("/assessments/*").hasRole("STUDENT")

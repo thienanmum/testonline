@@ -2,7 +2,7 @@
 INSERT INTO credentials(username,password,enabled) VALUES ('student','$2a$10$Of0ng1GgkV0bqGr39BcapeScv5UEKqzHrGzO58PVsfzLwyK76c50i', TRUE);
 INSERT INTO credentials(username,password,enabled) VALUES ('admin','$2a$10$S/wlXEo/APzf.Sn1cO2p4.V12EJmaw.uzrHelMvkpuahjmHWnSafe', TRUE);
 INSERT INTO credentials(username,password,enabled) VALUES ('professor','$2a$10$vBLWqIwpTijahZ8DBMOZquIs2xFEdCxv3baWEsR5km7eRBM2j1RvW', TRUE);
-', TRUE);  
+
 INSERT INTO authority (id,username, authority) VALUES (1,'student', 'ROLE_STUDENT');
 INSERT INTO authority (id,username, authority) VALUES (2,'admin', 'ROLE_PROFESSOR');
 INSERT INTO authority (id,username, authority) VALUES (3,'admin', 'ROLE_STUDENT');

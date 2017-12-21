@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import edu.mum.exam.domain.Question;
@@ -24,6 +25,7 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('ROLE_PROFESSOR')")
 	public Question saveQuestion(Question question) {		
 		return questionRepository.save(question);
 	}
