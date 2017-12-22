@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,7 @@ public class ExamServiceImpl implements ExamService{
 	public Iterable<Exam> getAllExams(){
 		return examRepository.findAll();
 	}
+	@PreAuthorize("hasRole('ROLE_PROFESSOR')")
 	public Exam save(Exam exam)
 	{
 		return examRepository.save(exam);
@@ -31,6 +33,7 @@ public class ExamServiceImpl implements ExamService{
 	{
 		return examRepository.getExamByExamId(examId);
 	}
+	@PreAuthorize("hasRole('ROLE_PROFESSOR')")
 	public ExamQuestion saveExamQuestion(ExamQuestion examQuestion)
 	{
 		return examRepository.save(examQuestion);

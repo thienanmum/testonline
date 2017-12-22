@@ -22,7 +22,7 @@ insert into subject(id, name) values(3, "Physics")
 /* Insert default questions */
 insert into question(id, questionId, subject, description, level, type, imagePath) values (1, "GEN-01", 1, "What is your dream?", "Easy", "FreeText", "");
 
-insert into question(id, questionId, subject, description, level, type, imagePath) values (2, "GEN-02", 2, "Calculate the area of a square of 4 metre edge", "Easy", "SingleChoice");
+insert into question(id, questionId, subject, description, level, type, imagePath) values (2, "GEN-02", 2, "Calculate the area of a square of 4 metre edge", "Easy", "SingleChoice", "");
 insert into questionchoice(question_id,description,displayOrder, isCorrect) values(2, "8", 1, false);
 insert into questionchoice(question_id,description,displayOrder, isCorrect) values(2, "16", 2, true);
 
